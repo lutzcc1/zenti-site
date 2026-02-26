@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0f1a">
   <title>Zenti — Meditaciones personalizadas con IA</title>
   <meta name="description" content="Imagina tu mejor versión y siéntela real. Zenti crea meditaciones de audio únicas basadas en cómo te sientes ahora — directo en Telegram.">
 
@@ -35,6 +36,7 @@
 
     html {
       scroll-behavior: smooth;
+      background: var(--bg);
     }
 
     body {
@@ -43,6 +45,11 @@
       color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
+    }
+
+    /* Prevent mobile browser chrome color mismatch */
+    @supports (color: env(safe-area-inset-bottom)) {
+      body { padding-bottom: env(safe-area-inset-bottom); }
     }
 
     /* ---- Ambient background ---- */
