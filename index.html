@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0c0f1a">
-  <title>Zenti — Meditaciones personalizadas con IA</title>
-  <meta name="description" content="Imagina tu mejor versión y siéntela real. Zenti crea meditaciones de audio únicas basadas en cómo te sientes ahora — directo en Telegram.">
+  <title>Zenti · Meditaciones personalizadas con IA</title>
+  <meta name="description" content="Imagina tu mejor versión y siéntela real. Zenti crea meditaciones de audio únicas basadas en cómo te sientes ahora. Directo en Telegram.">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Zenti — Meditaciones personalizadas con IA">
+  <meta property="og:title" content="Zenti · Meditaciones personalizadas con IA">
   <meta property="og:description" content="Imagina tu mejor versión y siéntela real. Meditaciones de audio únicas, creadas para ti.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="og-image.png">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
+
+  <!-- Analytics -->
+  <script defer data-domain="zenti.app" src="https://plausible.io/js/script.js"></script>
 
   <style>
     *,
@@ -485,6 +488,246 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ---- CTA pulse animation ---- */
+    @keyframes cta-pulse {
+      0%, 85%, 100% { transform: scale(1); box-shadow: 0 4px 30px rgba(184, 169, 232, 0.3); }
+      92% { transform: scale(1.02); box-shadow: 0 6px 40px rgba(184, 169, 232, 0.5); }
+    }
+
+    .cta {
+      animation: cta-pulse 5s ease-in-out infinite;
+    }
+
+    .cta:hover {
+      animation: none;
+    }
+
+    /* ---- Chat mockup ---- */
+    .chat-mockup {
+      max-width: 360px;
+      margin: 3rem auto 0;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-mockup-header {
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-mockup-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .chat-mockup-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .chat-mockup-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.6rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: rgba(184, 169, 232, 0.2);
+      border-bottom-right-radius: 4px;
+      color: var(--text);
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom-left-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .chat-bubble.audio {
+      align-self: flex-start;
+      background: rgba(184, 169, 232, 0.12);
+      border-bottom-left-radius: 4px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .chat-audio-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(184, 169, 232, 0.3);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-audio-bar::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 35%;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ---- FAQ accordion ---- */
+    .faq {
+      text-align: center;
+    }
+
+    .faq-list {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .faq-list details {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      background: var(--bg-card);
+      margin-bottom: 0.75rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .faq-list details:hover {
+      border-color: rgba(184, 169, 232, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .faq-list details[open] {
+      border-color: rgba(184, 169, 232, 0.2);
+    }
+
+    .faq-list summary {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .faq-list summary::-webkit-details-marker { display: none; }
+
+    .faq-list summary::after {
+      content: '+';
+      font-size: 1.3rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-list details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-list .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .faq-list .faq-answer a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* ---- Sticky mobile CTA ---- */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+      background: rgba(12, 15, 26, 0.92);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(184, 169, 232, 0.15);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .sticky-cta.visible {
+      transform: translateY(0);
+    }
+
+    .sticky-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent), #9b8dd4);
+      color: var(--bg);
+      text-decoration: none;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(184, 169, 232, 0.3);
+    }
+
+    .sticky-cta a svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 768px) {
+      .sticky-cta { display: block; }
+    }
+
+    /* ---- Breathing circle mobile shrink ---- */
+    @media (max-width: 600px) {
+      .breath-circle {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 1.5rem;
+      }
+      .breath-circle .inner {
+        width: 52px;
+        height: 52px;
+      }
+      .brand {
+        margin-bottom: 1.25rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -507,16 +750,17 @@
           <div class="inner"></div>
         </div>
         <p class="brand">Zenti</p>
-        <h1>Imagínalo. Escúchalo.<br><strong>Vívelo.</strong></h1>
+        <h1>Medita como nunca antes. Creado para ti, <strong>en este momento.</strong></h1>
         <p class="subtitle">
-          Cada sesión es única, creada por IA a partir de lo que sientes
-          en este momento. Hoy eres diferente, y tu meditación también.
+          Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
+          de audio única, creada solo para ti. Directo en Telegram.
         </p>
-        <a href="https://t.me/relivo_bot" class="cta" target="_blank" rel="noopener">
+        <a href="https://t.me/relivo_bot?start=web_hero" class="cta" target="_blank" rel="noopener" onclick="typeof plausible !== 'undefined' && plausible('CTA Click', {props: {location: 'hero'}})">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
-          Comenzar en Telegram
+          Probar mi primera meditación
         </a>
-        <span class="cta-hint">Empieza gratis, sin registro</span>
+        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
+        <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
       </div>
     </div>
   </section>
@@ -526,7 +770,7 @@
     <div class="container">
       <div class="reveal">
         <p class="section-label">Cómo funciona</p>
-        <h2>Tres pasos hacia tu nueva realidad</h2>
+        <h2>Tu primera meditación en 3 minutos</h2>
       </div>
       <div class="steps">
         <div class="step reveal-stagger">
@@ -541,8 +785,26 @@
         </div>
         <div class="step reveal-stagger">
           <div class="step-number">3</div>
-          <h3>Siente como si ya fuera real</h3>
-          <p>Recibe un audio con voz natural y música de fondo. Cierra los ojos y habita la versión de ti que ya existe.</p>
+          <h3>Escucha y siente</h3>
+          <p>Recibe un audio de meditación con voz cálida y música ambiental. Dale play, cierra los ojos y déjate guiar.</p>
+        </div>
+      </div>
+      <div class="chat-mockup reveal">
+        <div class="chat-mockup-header">
+          <div class="chat-mockup-avatar">Z</div>
+          <span class="chat-mockup-name">Zenti</span>
+        </div>
+        <div class="chat-mockup-body">
+          <div class="chat-bubble user">Tengo una entrevista de trabajo importante la próxima semana y quiero sentirme preparado</div>
+          <div class="chat-bubble bot">Qué buena oportunidad. ¿Cómo te gustaría sentirte cuando entres a esa entrevista?</div>
+          <div class="chat-bubble user">Seguro, tranquilo, como si el puesto ya fuera mío</div>
+          <div class="chat-bubble bot">Voy a crear una meditación para que vivas ese momento: entras confiado, te expresas con claridad, y sabes que el puesto es tuyo. Dame un momento...</div>
+          <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
+          <div class="chat-bubble audio">
+            ▶
+            <div class="chat-audio-bar"></div>
+            <span style="font-size: 0.75rem; opacity: 0.7;">8:14</span>
+          </div>
         </div>
       </div>
     </div>
@@ -554,13 +816,14 @@
       <div class="reveal">
         <div class="glow-divider" aria-hidden="true"></div>
         <div class="personalization-inner">
-          <blockquote>"Asume el sentimiento del deseo cumplido."</blockquote>
-          <cite>— Neville Goddard</cite>
+          <blockquote>Imagina: son las 11 de la noche, no puedes dormir. Le escribes a Zenti "estoy agotada pero mi mente no para". En 2 minutos, recibes una meditación de audio hecha para ese exacto momento.</blockquote>
           <p class="detail">
-            Zenti se basa en este principio: cada meditación te guía a
-            <strong>sentir tu intención como algo ya real</strong>. No es
-            visualización genérica. Es una experiencia construida desde
-            tu contexto, tus palabras, tu ahora.
+            Tu mente no distingue entre lo que imaginas con emoción y lo que vives.
+            Cada sesión te guía a <strong>sentir tu deseo como algo real</strong>,
+            activando las mismas rutas que la experiencia vivida.
+          </p>
+          <p class="detail" style="margin-top: 1.5rem; font-style: italic; color: var(--warm);">
+            Para noches de ansiedad. Para mañanas de intención. Para cuando necesitas soltar y no sabes cómo.
           </p>
         </div>
       </div>
@@ -589,8 +852,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
           <div>
-            <h3>Conecta con tu intención</h3>
-            <p>Basada en la Ley de Asunción: te guía a vivir desde el estado deseado, no hacia él.</p>
+            <h3>Hecha para lo que necesitas hoy</h3>
+            <p>Cada meditación parte de tus palabras y tu estado emocional. No es un audio genérico: es una guía creada para lo que estás viviendo ahora.</p>
           </div>
         </div>
         <div class="benefit reveal-stagger">
@@ -607,10 +870,38 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <div>
-            <h3>Sin fricción</h3>
-            <p>Abre Telegram, escribe, recibe. Sin apps, sin cuentas, sin suscripciones. Solo tú y tu meditación.</p>
+            <h3>Tu guía personal, a un mensaje</h3>
+            <p>Sin descargar apps, sin crear cuentas. Abre Telegram, escribe cómo te sientes, y tu meditación llega en minutos.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Preguntas frecuentes</p>
+        <h2>Todo lo que necesitas saber</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>¿Necesito tener Telegram?</summary>
+          <div class="faq-answer">Sí, Zenti funciona dentro de Telegram. Es gratis y se descarga en 1 minuto. <a href="https://telegram.org/dl" target="_blank" rel="noopener">Descargar Telegram</a></div>
+        </details>
+        <details>
+          <summary>¿Es realmente gratis?</summary>
+          <div class="faq-answer">Tus primeras 3 meditaciones son completamente gratis. Sin compromiso.</div>
+        </details>
+        <details>
+          <summary>¿Cuánto dura cada meditación?</summary>
+          <div class="faq-answer">Entre 5 y 10 minutos, dependiendo de tu sesión.</div>
+        </details>
+        <details>
+          <summary>¿Qué pasa con lo que comparto?</summary>
+          <div class="faq-answer">Tu conversación es privada. No almacenamos datos personales más allá de lo necesario para crear tu meditación.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -620,20 +911,29 @@
     <div class="container reveal">
       <div class="glow-divider" aria-hidden="true"></div>
       <p class="section-label">Empieza ahora</p>
-      <h2>Tu próxima versión ya te está esperando</h2>
-      <p class="subtitle">Sin registro, sin suscripciones. Pruébalo gratis y paga solo por lo que uses.</p>
-      <a href="https://t.me/relivo_bot" class="cta" target="_blank" rel="noopener">
+      <h2>Tu primera meditación personalizada te espera</h2>
+      <p class="subtitle">3 sesiones gratis, sin registro, listas en 2 minutos. Solo dile a Zenti cómo te sientes.</p>
+      <a href="https://t.me/relivo_bot?start=web_bottom" class="cta" target="_blank" rel="noopener" onclick="typeof plausible !== 'undefined' && plausible('CTA Click', {props: {location: 'bottom'}})">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
-        Abrir Zenti
+        Crear mi meditación gratis
       </a>
       <span class="cta-hint">Disponible 24/7 en Telegram</span>
+      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
     </div>
   </section>
+
+  <!-- Sticky mobile CTA -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="https://t.me/relivo_bot?start=web_sticky" target="_blank" rel="noopener" onclick="typeof plausible !== 'undefined' && plausible('CTA Click', {props: {location: 'sticky'}})">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+      Probar mi primera meditación
+    </a>
+  </div>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>Zenti — Meditaciones con inteligencia artificial</p>
+      <p>Zenti · Meditaciones con inteligencia artificial</p>
     </div>
   </footer>
 
@@ -691,6 +991,39 @@
 
     setInterval(createParticle, 1800);
     for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
+
+    // Sticky mobile CTA visibility
+    const stickyCta = document.getElementById('stickyCta');
+    const heroSection = document.querySelector('.hero');
+    const bottomCtaSection = document.querySelector('.bottom-cta');
+
+    if (stickyCta && heroSection && bottomCtaSection) {
+      const stickyObserver = new IntersectionObserver(
+        ([heroEntry]) => {
+          const bottomRect = bottomCtaSection.getBoundingClientRect();
+          const bottomVisible = bottomRect.top < window.innerHeight;
+          if (!heroEntry.isIntersecting && !bottomVisible) {
+            stickyCta.classList.add('visible');
+          } else {
+            stickyCta.classList.remove('visible');
+          }
+        },
+        { threshold: 0 }
+      );
+      stickyObserver.observe(heroSection);
+
+      window.addEventListener('scroll', () => {
+        const bottomRect = bottomCtaSection.getBoundingClientRect();
+        const heroRect = heroSection.getBoundingClientRect();
+        const heroVisible = heroRect.bottom > 0;
+        const bottomVisible = bottomRect.top < window.innerHeight;
+        if (heroVisible || bottomVisible) {
+          stickyCta.classList.remove('visible');
+        } else {
+          stickyCta.classList.add('visible');
+        }
+      }, { passive: true });
+    }
   </script>
 </body>
 </html>
