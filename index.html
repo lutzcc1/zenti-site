@@ -249,6 +249,7 @@
     /* ---- Hero ---- */
     .hero {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -418,6 +419,17 @@
       font-size: 0.95rem;
       color: var(--text-muted);
       line-height: 1.65;
+    }
+
+    /* ---- Inline mid-page CTA ---- */
+    .inline-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .inline-cta .cta {
+      font-size: 1rem;
+      padding: 0.95rem 2.25rem;
     }
 
     /* ---- Personalization callout ---- */
@@ -688,15 +700,49 @@
       overflow: hidden;
     }
 
-    .chat-audio-bar::after {
-      content: '';
+    .chat-audio-bar-progress {
       position: absolute;
       left: 0;
       top: 0;
       height: 100%;
-      width: 35%;
+      width: 0%;
       background: var(--accent);
       border-radius: 2px;
+      transition: width 0.25s linear;
+    }
+
+    .chat-bubble.audio {
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .chat-bubble.audio:hover {
+      background: rgba(184, 169, 232, 0.18);
+    }
+
+    .chat-audio-play {
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: play-hint 2s ease-in-out 3;
+    }
+
+    .chat-bubble.audio.playing .chat-audio-play {
+      animation: none;
+    }
+
+    @keyframes play-hint {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .chat-audio-hint {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 0.5rem;
+      opacity: 0.6;
     }
 
     /* Typing indicator */
@@ -909,20 +955,27 @@
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
-        width: 160px;
-        height: 160px;
-        margin: 0 auto 1.5rem;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
       }
       .breath-circle {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
       }
       .breath-circle .inner {
-        width: 52px;
-        height: 52px;
+        width: 36px;
+        height: 36px;
       }
       .brand {
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+      .hero h1 {
+        font-size: clamp(1.6rem, 5.5vw, 2.5rem);
+      }
+      .subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
       }
     }
   </style>
@@ -950,7 +1003,7 @@
           </div>
         </div>
         <p class="brand">Zenti</p>
-        <h1>Medita como nunca antes. Creado para ti, <strong>en este momento.</strong></h1>
+        <h1>Tu mente no para. En 2 minutos, <strong>una meditación que te entiende.</strong></h1>
         <p class="subtitle">
           Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
           de audio única, creada solo para ti. Directo en Telegram.
@@ -960,7 +1013,7 @@
           Probar mi primera meditación
         </a>
         <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
-        <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
+        <span class="cta-hint" style="margin-top: 0.5rem; font-size: 0.85rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Descárgalo gratis aquí</a> — toma 1 minuto</span>
       </div>
     </div>
   </section>
@@ -995,22 +1048,28 @@
           <span class="chat-mockup-name">Zenti</span>
         </div>
         <div class="chat-mockup-body">
-          <div class="chat-bubble user">Tengo una entrevista de trabajo importante la próxima semana y quiero sentirme preparado</div>
-          <div class="chat-bubble bot">Qué buena oportunidad. ¿Cómo te gustaría sentirte cuando entres a esa entrevista?</div>
-          <div class="chat-bubble user">Seguro, tranquilo, como si el puesto ya fuera mío</div>
-          <div class="chat-bubble bot">Voy a crear una meditación para que vivas ese momento: entras confiado, te expresas con claridad, y sabes que el puesto es tuyo. Dame un momento...</div>
-          <div class="chat-typing">
-            <div class="chat-typing-dot"></div>
-            <div class="chat-typing-dot"></div>
-            <div class="chat-typing-dot"></div>
-          </div>
+          <div class="chat-bubble user">Tengo una presentación importante la próxima semana. Me siento nervioso.</div>
+          <div class="chat-bubble bot">Es completamente normal sentirse así antes de algo importante. Cuéntame un poco más: ¿de qué se trata y qué es lo que más te preocupa?</div>
+          <div class="chat-bubble user">Voy a presentar mi proyecto a un cliente potencial. Sería un gran logro en mi carrera, pero no hago presentaciones a menudo y el cliente es muy exigente.</div>
+          <div class="chat-bubble bot">Una mezcla de emoción y miedo, es natural. ¿Qué es lo que más deseas que pase? ¿Cuál sería el resultado ideal?</div>
+          <div class="chat-bubble user">Cerrar al cliente. Que salga convencido del valor que ofrezco y haya buena química entre nosotros.</div>
+          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y cierras al cliente. Dame un momento...</div>
           <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
-          <div class="chat-bubble audio">
-            ▶
-            <div class="chat-audio-bar"></div>
-            <span style="font-size: 0.75rem; opacity: 0.7;">8:14</span>
+          <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
+            <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>
+            <span class="chat-audio-play" id="play-icon">▶</span>
+            <div class="chat-audio-bar"><div class="chat-audio-bar-progress" id="audio-progress"></div></div>
+            <span style="font-size: 0.75rem; opacity: 0.7;" id="audio-time">0:00</span>
           </div>
+          <p class="chat-audio-hint">Dale play y escucha un ejemplo real</p>
         </div>
+      </div>
+      <div class="inline-cta reveal">
+        <a href="https://t.me/zenti_app_bot?start=web_mockup" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'mockup'})">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+          Crear mi meditación gratis
+        </a>
+        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
       </div>
     </div>
   </section>
@@ -1080,6 +1139,13 @@
           </div>
         </div>
       </div>
+      <div class="inline-cta reveal">
+        <a href="https://t.me/zenti_app_bot?start=web_benefits" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'benefits'})">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+          Probar mi primera meditación
+        </a>
+        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
+      </div>
     </div>
   </section>
 
@@ -1125,7 +1191,11 @@
       <div class="faq-list reveal">
         <details>
           <summary>¿Necesito tener Telegram?</summary>
-          <div class="faq-answer">Sí, Zenti funciona dentro de Telegram. Es gratis y se descarga en 1 minuto. <a href="https://telegram.org/dl" target="_blank" rel="noopener">Descargar Telegram</a></div>
+          <div class="faq-answer">Sí. Zenti vive en Telegram para que no necesites descargar otra app, crear otra cuenta, o recordar otra contraseña. Abres un chat y empiezas. Si aún no lo tienes, <a href="https://telegram.org/dl" target="_blank" rel="noopener">descárgalo gratis aquí</a> (1 minuto).</div>
+        </details>
+        <details>
+          <summary>¿Por qué Telegram y no otra app?</summary>
+          <div class="faq-answer">Telegram nos permite enviarte audios de alta calidad directo a tu chat, sin intermediarios, sin notificaciones innecesarias, y con total privacidad. Es la forma más simple de llegar a ti cuando más lo necesitas.</div>
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
@@ -1229,6 +1299,51 @@
 
     setInterval(createParticle, 1800);
     for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
+
+    // Sample audio player
+    const samplePlayer = document.getElementById('sample-player');
+    const sampleAudio = document.getElementById('sample-audio');
+    const playIcon = document.getElementById('play-icon');
+    const audioProgress = document.getElementById('audio-progress');
+    const audioTime = document.getElementById('audio-time');
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    sampleAudio.addEventListener('loadedmetadata', () => {
+      audioTime.textContent = formatTime(sampleAudio.duration);
+    });
+
+    samplePlayer.addEventListener('click', () => {
+      if (sampleAudio.paused) {
+        sampleAudio.play();
+        playIcon.textContent = '⏸';
+        samplePlayer.classList.add('playing');
+        gtag('event', 'sample_play', { location: 'chat_mockup' });
+      } else {
+        sampleAudio.pause();
+        playIcon.textContent = '▶';
+        samplePlayer.classList.remove('playing');
+      }
+    });
+
+    sampleAudio.addEventListener('timeupdate', () => {
+      if (sampleAudio.duration) {
+        const pct = (sampleAudio.currentTime / sampleAudio.duration) * 100;
+        audioProgress.style.width = pct + '%';
+        audioTime.textContent = formatTime(sampleAudio.currentTime);
+      }
+    });
+
+    sampleAudio.addEventListener('ended', () => {
+      playIcon.textContent = '▶';
+      audioProgress.style.width = '0%';
+      audioTime.textContent = formatTime(sampleAudio.duration);
+      samplePlayer.classList.remove('playing');
+    });
 
     // FAQ open tracking
     document.querySelectorAll('.faq-list details').forEach(detail => {
