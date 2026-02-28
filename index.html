@@ -15,8 +15,14 @@
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
 
-  <!-- Analytics -->
-  <script defer data-domain="zenti.app" src="https://plausible.io/js/script.js"></script>
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH4YT1VEGE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TH4YT1VEGE');
+  </script>
 
   <style>
     *,
@@ -808,7 +814,7 @@
           Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
           de audio única, creada solo para ti. Directo en Telegram.
         </p>
-        <a href="https://t.me/zenti_app_bot?start=web_hero" class="cta" target="_blank" rel="noopener" onclick="typeof plausible !== 'undefined' && plausible('CTA Click', {props: {location: 'hero'}})">
+        <a href="https://t.me/zenti_app_bot?start=web_hero" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'hero'})">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
           Probar mi primera meditación
         </a>
@@ -1006,7 +1012,7 @@
       <p class="section-label">Empieza ahora</p>
       <h2>Tu primera meditación personalizada te espera</h2>
       <p class="subtitle">3 sesiones gratis, sin registro, listas en 2 minutos. Solo dile a Zenti cómo te sientes.</p>
-      <a href="https://t.me/zenti_app_bot?start=web_bottom" class="cta" target="_blank" rel="noopener" onclick="typeof plausible !== 'undefined' && plausible('CTA Click', {props: {location: 'bottom'}})">
+      <a href="https://t.me/zenti_app_bot?start=web_bottom" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'bottom'})">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
         Crear mi meditación gratis
       </a>
@@ -1078,6 +1084,16 @@
     setInterval(createParticle, 1800);
     for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
 
+    // FAQ open tracking
+    document.querySelectorAll('.faq-list details').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          gtag('event', 'faq_open', {
+            question: detail.querySelector('summary').textContent
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
