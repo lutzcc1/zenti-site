@@ -600,6 +600,105 @@
       border-radius: 2px;
     }
 
+    /* ---- Pricing ---- */
+    .pricing {
+      text-align: center;
+    }
+
+    .pricing-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: -2rem auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    .pricing-card {
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+
+    .pricing-card:hover {
+      border-color: rgba(184, 169, 232, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(184, 169, 232, 0.3);
+      background: rgba(184, 169, 232, 0.06);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -0.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), #9b8dd4);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-sessions {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-price {
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 0.15rem;
+    }
+
+    .pricing-savings {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #a8e6cf;
+      background: rgba(168, 230, 207, 0.1);
+      border: 1px solid rgba(168, 230, 207, 0.2);
+      border-radius: 999px;
+    }
+
+    .pricing-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
     /* ---- FAQ accordion ---- */
     .faq {
       text-align: center;
@@ -878,6 +977,38 @@
     </div>
   </section>
 
+  <!-- Pricing -->
+  <section class="pricing">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Paquetes</p>
+        <h2>Tus primeras 3 sesiones son gratis</h2>
+        <p class="pricing-subtitle">Después, elige el paquete que prefieras. Sin suscripciones, sin vencimiento.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal-stagger">
+          <h3>Básico</h3>
+          <p class="pricing-sessions">5 sesiones</p>
+          <p class="pricing-price">$199</p>
+        </div>
+        <div class="pricing-card featured reveal-stagger">
+          <div class="pricing-badge">Más elegido</div>
+          <h3>Popular</h3>
+          <p class="pricing-sessions">15 sesiones</p>
+          <p class="pricing-price">$499</p>
+          <span class="pricing-savings">Ahorra 17%</span>
+        </div>
+        <div class="pricing-card reveal-stagger">
+          <h3>Premium</h3>
+          <p class="pricing-sessions">30 sesiones</p>
+          <p class="pricing-price">$899</p>
+          <span class="pricing-savings">Ahorra 25%</span>
+        </div>
+      </div>
+      <p class="pricing-note">Precios en MXN. Compra directo desde Telegram.</p>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="faq">
     <div class="container">
@@ -892,7 +1023,11 @@
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
-          <div class="faq-answer">Tus primeras 3 meditaciones son completamente gratis. Sin compromiso.</div>
+          <div class="faq-answer">Tus primeras 3 meditaciones son completamente gratis. Después, puedes comprar paquetes de sesiones desde $199 MXN. Sin suscripciones, sin vencimiento: las usas cuando quieras.</div>
+        </details>
+        <details>
+          <summary>¿Las sesiones vencen o hay suscripción?</summary>
+          <div class="faq-answer">No y no. Tus sesiones no vencen y no hay cobros recurrentes. Compras un paquete y lo usas a tu ritmo, cuando quieras.</div>
         </details>
         <details>
           <summary>¿Cuánto dura cada meditación?</summary>
