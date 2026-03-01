@@ -952,6 +952,142 @@
     }
 
 
+    /* ---- iOS Waitlist ---- */
+    .ios-waitlist {
+      text-align: center;
+    }
+
+    .ios-waitlist-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .ios-waitlist-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      background: rgba(184, 169, 232, 0.08);
+      border: 1px solid rgba(184, 169, 232, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ios-waitlist-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .ios-waitlist-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: -1.5rem auto 2rem;
+      max-width: 440px;
+      font-weight: 300;
+    }
+
+    .waitlist-form {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .waitlist-input-group {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0.35rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .waitlist-input-group:focus-within {
+      border-color: rgba(184, 169, 232, 0.4);
+      box-shadow: 0 0 30px rgba(184, 169, 232, 0.08);
+    }
+
+    .waitlist-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      min-width: 0;
+    }
+
+    .waitlist-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .waitlist-btn {
+      background: linear-gradient(135deg, var(--accent), #9b8dd4);
+      color: var(--bg);
+      border: none;
+      border-radius: 12px;
+      padding: 0.75rem 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .waitlist-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .waitlist-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .waitlist-hint {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .waitlist-success {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      background: rgba(168, 230, 207, 0.08);
+      border: 1px solid rgba(168, 230, 207, 0.2);
+      border-radius: 16px;
+      color: #a8e6cf;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .waitlist-error {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #e8a0a0;
+    }
+
+    @media (max-width: 600px) {
+      .waitlist-input-group {
+        flex-direction: column;
+      }
+
+      .waitlist-btn {
+        padding: 0.85rem;
+        border-radius: 12px;
+      }
+    }
+
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -1221,6 +1357,37 @@
     </div>
   </section>
 
+  <!-- iOS App Waitlist -->
+  <section class="ios-waitlist">
+    <div class="container reveal">
+      <div class="glow-divider" aria-hidden="true"></div>
+      <div class="ios-waitlist-inner">
+        <div class="ios-waitlist-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="3" ry="3"/>
+            <line x1="12" y1="18" x2="12" y2="18.01" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="section-label">Próximamente</p>
+        <h2>Zenti llega a iOS</h2>
+        <p class="ios-waitlist-desc">
+          Estamos creando la app de Zenti para iPhone. Meditaciones personalizadas,
+          historial de sesiones, y más — todo desde tu bolsillo.
+        </p>
+        <form class="waitlist-form" id="waitlist-form">
+          <div class="waitlist-input-group">
+            <input type="email" placeholder="Tu correo electrónico" required id="waitlist-email" class="waitlist-input" autocomplete="email">
+            <button type="submit" class="waitlist-btn" id="waitlist-btn">Unirme a la lista</button>
+          </div>
+          <p class="waitlist-hint">Te avisaremos cuando la app esté lista. Sin spam, lo prometemos.</p>
+        </form>
+        <div class="waitlist-success" id="waitlist-success" style="display: none;">
+          ¡Listo! Te avisaremos cuando la app esté disponible.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Bottom CTA -->
   <section class="bottom-cta">
     <div class="container reveal">
@@ -1354,6 +1521,47 @@
           });
         }
       });
+    });
+
+    // iOS Waitlist form
+    const waitlistForm = document.getElementById('waitlist-form');
+    const waitlistEmail = document.getElementById('waitlist-email');
+    const waitlistBtn = document.getElementById('waitlist-btn');
+    const waitlistSuccess = document.getElementById('waitlist-success');
+
+    waitlistForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = waitlistEmail.value.trim();
+      if (!email) return;
+
+      waitlistBtn.disabled = true;
+      waitlistBtn.textContent = 'Enviando...';
+
+      // Remove previous error if any
+      const prevError = waitlistForm.querySelector('.waitlist-error');
+      if (prevError) prevError.remove();
+
+      try {
+        const res = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        if (!res.ok) throw new Error('Error del servidor');
+
+        // Success
+        waitlistForm.style.display = 'none';
+        waitlistSuccess.style.display = 'block';
+        gtag('event', 'waitlist_signup', { location: 'ios_waitlist' });
+      } catch (err) {
+        waitlistBtn.disabled = false;
+        waitlistBtn.textContent = 'Unirme a la lista';
+        const errorEl = document.createElement('p');
+        errorEl.className = 'waitlist-error';
+        errorEl.textContent = 'Algo salió mal. Intenta de nuevo.';
+        waitlistForm.appendChild(errorEl);
+      }
     });
   </script>
 </body>
