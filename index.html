@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0c0f1a">
   <title>Zenti · Meditaciones personalizadas con IA</title>
-  <meta name="description" content="Imagina tu mejor versión y siéntela real. Zenti crea meditaciones de audio únicas basadas en cómo te sientes ahora. Directo en Telegram.">
+  <meta name="description" content="Imagina tu mejor versión y siéntela real. Zenti crea meditaciones de audio únicas basadas en cómo te sientes ahora.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Zenti · Meditaciones personalizadas con IA">
@@ -952,6 +952,92 @@
     }
 
 
+    /* ---- Announcement banner ---- */
+    .announce-banner {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(184, 169, 232, 0.1));
+      border-bottom: 1px solid rgba(184, 169, 232, 0.15);
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text);
+      position: relative;
+    }
+
+    .announce-banner p {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .announce-banner form {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .announce-banner input[type="email"] {
+      padding: 0.4rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      width: 200px;
+    }
+
+    .announce-banner input[type="email"]::placeholder {
+      color: var(--text-muted);
+    }
+
+    .announce-banner input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+
+    .announce-banner button[type="submit"] {
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      border: none;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .announce-banner button[type="submit"]:hover {
+      opacity: 0.85;
+    }
+
+    .announce-banner .dismiss {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .announce-banner form {
+        display: flex;
+        justify-content: center;
+      }
+      .announce-banner input[type="email"] {
+        width: 160px;
+      }
+      .announce-banner .dismiss {
+        right: 0.5rem;
+      }
+    }
+
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -982,6 +1068,19 @@
 </head>
 <body>
 
+  <!-- App announcement banner -->
+  <div class="announce-banner" id="announce-banner">
+    <button class="dismiss" onclick="document.getElementById('announce-banner').remove(); localStorage.setItem('banner-dismissed','1');" aria-label="Cerrar">&times;</button>
+    <p>La app de Zenti llega pronto a iOS y Android</p>
+    <form action="https://formsubmit.co/hola@zennes.io" method="POST">
+      <input type="hidden" name="_subject" value="Zenti App - Nuevo registro de interés">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://zenti.app">
+      <input type="email" name="email" placeholder="tu@email.com" required>
+      <button type="submit">Avísame</button>
+    </form>
+  </div>
+
   <!-- Ambient background -->
   <div class="ambient" aria-hidden="true">
     <div class="orb orb-1"></div>
@@ -1006,14 +1105,14 @@
         <h1>Tu mente no para. En 2 minutos, <strong>una meditación que te entiende.</strong></h1>
         <p class="subtitle">
           Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
-          de audio única, creada solo para ti. Directo en Telegram.
+          de audio única, creada solo para ti.
         </p>
         <a href="https://t.me/zenti_app_bot?start=web_hero" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'hero'})">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
-          Probar mi primera meditación
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Pruébalo gratis ahora
         </a>
-        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
-        <span class="cta-hint" style="margin-top: 0.5rem; font-size: 0.85rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Descárgalo gratis aquí</a> — toma 1 minuto</span>
+        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
+        <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">Actualmente disponible en Telegram. App para iOS y Android muy pronto.</span>
       </div>
     </div>
   </section>
@@ -1029,7 +1128,7 @@
         <div class="step reveal-stagger">
           <div class="step-number">1</div>
           <h3>Cuéntanos cómo te sientes</h3>
-          <p>Abre Zenti en Telegram y comparte tu estado actual. Lo que sientes, lo que quieres soltar, lo que deseas atraer.</p>
+          <p>Abre Zenti y comparte cómo estás. Escribe o envía una nota de voz con lo que sientes, lo que quieres soltar, lo que deseas atraer.</p>
         </div>
         <div class="step reveal-stagger">
           <div class="step-number">2</div>
@@ -1066,10 +1165,10 @@
       </div>
       <div class="inline-cta reveal">
         <a href="https://t.me/zenti_app_bot?start=web_mockup" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'mockup'})">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Crear mi meditación gratis
         </a>
-        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
+        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
       </div>
     </div>
   </section>
@@ -1135,16 +1234,16 @@
           </div>
           <div>
             <h3>Tu guía personal, a un mensaje</h3>
-            <p>Sin descargar apps, sin crear cuentas. Abre Telegram, escribe cómo te sientes, y tu meditación llega en minutos.</p>
+            <p>Escribe cómo te sientes y tu meditación llega en minutos.</p>
           </div>
         </div>
       </div>
       <div class="inline-cta reveal">
         <a href="https://t.me/zenti_app_bot?start=web_benefits" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'benefits'})">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Probar mi primera meditación
         </a>
-        <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
+        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
       </div>
     </div>
   </section>
@@ -1177,7 +1276,7 @@
           <span class="pricing-savings">Ahorra 25%</span>
         </div>
       </div>
-      <p class="pricing-note">Precios en MXN. Compra directo desde Telegram.</p>
+      <p class="pricing-note">Precios en MXN. Compra directo desde la app.</p>
     </div>
   </section>
 
@@ -1190,12 +1289,8 @@
       </div>
       <div class="faq-list reveal">
         <details>
-          <summary>¿Necesito tener Telegram?</summary>
-          <div class="faq-answer">Sí. Zenti vive en Telegram para que no necesites descargar otra app, crear otra cuenta, o recordar otra contraseña. Abres un chat y empiezas. Si aún no lo tienes, <a href="https://telegram.org/dl" target="_blank" rel="noopener">descárgalo gratis aquí</a> (1 minuto).</div>
-        </details>
-        <details>
-          <summary>¿Por qué Telegram y no otra app?</summary>
-          <div class="faq-answer">Telegram nos permite enviarte audios de alta calidad directo a tu chat, sin intermediarios, sin notificaciones innecesarias, y con total privacidad. Es la forma más simple de llegar a ti cuando más lo necesitas.</div>
+          <summary>¿Dónde puedo usar Zenti?</summary>
+          <div class="faq-answer">Estamos por lanzar la app para iOS y Android. Mientras tanto, puedes probarlo gratis en <a href="https://telegram.org/dl" target="_blank" rel="noopener" class="telegram-dl">Telegram</a>.</div>
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
@@ -1229,11 +1324,11 @@
       <h2>Tu primera meditación personalizada te espera</h2>
       <p class="subtitle">3 sesiones gratis, sin registro, listas en 2 minutos. Solo dile a Zenti cómo te sientes.</p>
       <a href="https://t.me/zenti_app_bot?start=web_bottom" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'bottom'})">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.98-1.73 6.64-2.88 7.97-3.44 3.8-1.58 4.59-1.86 5.1-1.87.11 0 .37.03.54.17.14.12.18.28.2.46-.01.06.01.24 0 .37z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Crear mi meditación gratis
       </a>
-      <span class="cta-hint">Disponible 24/7 en Telegram</span>
-      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
+      <span class="cta-hint">Disponible 24/7</span>
+      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">Actualmente disponible en Telegram. App para iOS y Android muy pronto.</span>
     </div>
   </section>
 
@@ -1246,6 +1341,12 @@
   </footer>
 
   <script>
+    // Hide announcement banner if previously dismissed
+    if (localStorage.getItem('banner-dismissed') === '1') {
+      var b = document.getElementById('announce-banner');
+      if (b) b.remove();
+    }
+
     // Scroll reveal
     const observer = new IntersectionObserver(
       (entries) => {
@@ -1259,6 +1360,20 @@
     );
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Set Telegram download links to the correct app store based on platform
+    (function() {
+      var ua = navigator.userAgent || '';
+      var href;
+      if (/android/i.test(ua)) {
+        href = 'https://play.google.com/store/apps/details?id=org.telegram.messenger';
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        href = 'https://apps.apple.com/app/telegram-messenger/id686449807';
+      }
+      if (href) {
+        document.querySelectorAll('.telegram-dl').forEach(function(a) { a.href = href; });
+      }
+    })();
 
     // Staggered reveal for grid items
     const staggerObserver = new IntersectionObserver(
