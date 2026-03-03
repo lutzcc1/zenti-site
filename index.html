@@ -1025,6 +1025,19 @@
       line-height: 1;
     }
 
+    .announce-banner .form-msg {
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+    }
+
+    .announce-banner .form-msg.success {
+      color: #6ee7b7;
+    }
+
+    .announce-banner .form-msg.error {
+      color: #fca5a5;
+    }
+
     @media (max-width: 600px) {
       .announce-banner form {
         display: flex;
@@ -1072,13 +1085,11 @@
   <div class="announce-banner" id="announce-banner">
     <button class="dismiss" onclick="document.getElementById('announce-banner').remove(); localStorage.setItem('banner-dismissed','1');" aria-label="Cerrar">&times;</button>
     <p>La app de Zenti llega pronto a iOS y Android</p>
-    <form action="https://formsubmit.co/hola@zennes.io" method="POST">
-      <input type="hidden" name="_subject" value="Zenti App - Nuevo registro de interés">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://zenti.app">
+    <form id="announce-form">
       <input type="email" name="email" placeholder="tu@email.com" required>
       <button type="submit">Avísame</button>
     </form>
+    <div id="announce-form-msg" class="form-msg"></div>
   </div>
 
   <!-- Ambient background -->
@@ -1346,6 +1357,47 @@
       var b = document.getElementById('announce-banner');
       if (b) b.remove();
     }
+
+    // Handle app announcement form via AJAX
+    (function() {
+      var form = document.getElementById('announce-form');
+      if (!form) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var msg = document.getElementById('announce-form-msg');
+        var btn = form.querySelector('button[type="submit"]');
+        var email = form.querySelector('input[name="email"]').value;
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+        msg.textContent = '';
+        msg.className = 'form-msg';
+        fetch('https://formsubmit.co/ajax/hola@zennes.io', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            _subject: 'Zenti App - Nuevo registro de interés',
+            _captcha: 'false'
+          })
+        }).then(function(res) { return res.json(); }).then(function(data) {
+          if (data.success === 'true' || data.success === true) {
+            msg.textContent = 'Te avisaremos cuando la app esté lista.';
+            msg.className = 'form-msg success';
+            form.style.display = 'none';
+          } else {
+            msg.textContent = 'Algo salió mal. Inténtalo de nuevo.';
+            msg.className = 'form-msg error';
+            btn.disabled = false;
+            btn.textContent = 'Avísame';
+          }
+        }).catch(function() {
+          msg.textContent = 'Error de conexión. Inténtalo de nuevo.';
+          msg.className = 'form-msg error';
+          btn.disabled = false;
+          btn.textContent = 'Avísame';
+        });
+      });
+    })();
 
     // Scroll reveal
     const observer = new IntersectionObserver(
