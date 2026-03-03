@@ -952,6 +952,92 @@
     }
 
 
+    /* ---- Announcement banner ---- */
+    .announce-banner {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(184, 169, 232, 0.1));
+      border-bottom: 1px solid rgba(184, 169, 232, 0.15);
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text);
+      position: relative;
+    }
+
+    .announce-banner p {
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .announce-banner form {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .announce-banner input[type="email"] {
+      padding: 0.4rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      width: 200px;
+    }
+
+    .announce-banner input[type="email"]::placeholder {
+      color: var(--text-muted);
+    }
+
+    .announce-banner input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+
+    .announce-banner button[type="submit"] {
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      border: none;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .announce-banner button[type="submit"]:hover {
+      opacity: 0.85;
+    }
+
+    .announce-banner .dismiss {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .announce-banner form {
+        display: flex;
+        justify-content: center;
+      }
+      .announce-banner input[type="email"] {
+        width: 160px;
+      }
+      .announce-banner .dismiss {
+        right: 0.5rem;
+      }
+    }
+
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -981,6 +1067,19 @@
   </style>
 </head>
 <body>
+
+  <!-- App announcement banner -->
+  <div class="announce-banner" id="announce-banner">
+    <button class="dismiss" onclick="document.getElementById('announce-banner').remove(); localStorage.setItem('banner-dismissed','1');" aria-label="Cerrar">&times;</button>
+    <p>La app de Zenti llega pronto a iOS y Android</p>
+    <form action="https://formsubmit.co/hola@zennes.io" method="POST">
+      <input type="hidden" name="_subject" value="Zenti App - Nuevo registro de interés">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://zenti.app">
+      <input type="email" name="email" placeholder="tu@email.com" required>
+      <button type="submit">Avísame</button>
+    </form>
+  </div>
 
   <!-- Ambient background -->
   <div class="ambient" aria-hidden="true">
@@ -1242,6 +1341,12 @@
   </footer>
 
   <script>
+    // Hide announcement banner if previously dismissed
+    if (localStorage.getItem('banner-dismissed') === '1') {
+      var b = document.getElementById('announce-banner');
+      if (b) b.remove();
+    }
+
     // Scroll reveal
     const observer = new IntersectionObserver(
       (entries) => {
