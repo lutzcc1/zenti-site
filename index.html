@@ -1013,7 +1013,7 @@
           Probar mi primera meditación
         </a>
         <span class="cta-hint">Gratis · Sin registro · En Telegram</span>
-        <span class="cta-hint" style="margin-top: 0.5rem; font-size: 0.85rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline; font-weight: 500;">Descárgalo gratis aquí</a> — toma 1 minuto</span>
+        <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" class="telegram-dl" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
       </div>
     </div>
   </section>
@@ -1191,11 +1191,7 @@
       <div class="faq-list reveal">
         <details>
           <summary>¿Necesito tener Telegram?</summary>
-          <div class="faq-answer">Sí. Zenti vive en Telegram para que no necesites descargar otra app, crear otra cuenta, o recordar otra contraseña. Abres un chat y empiezas. Si aún no lo tienes, <a href="https://telegram.org/dl" target="_blank" rel="noopener">descárgalo gratis aquí</a> (1 minuto).</div>
-        </details>
-        <details>
-          <summary>¿Por qué Telegram y no otra app?</summary>
-          <div class="faq-answer">Telegram nos permite enviarte audios de alta calidad directo a tu chat, sin intermediarios, sin notificaciones innecesarias, y con total privacidad. Es la forma más simple de llegar a ti cuando más lo necesitas.</div>
+          <div class="faq-answer">Sí, Zenti funciona dentro de Telegram. Es gratis y se descarga en 1 minuto. <a href="https://telegram.org/dl" target="_blank" rel="noopener" class="telegram-dl">Descargar Telegram</a></div>
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
@@ -1233,7 +1229,7 @@
         Crear mi meditación gratis
       </a>
       <span class="cta-hint">Disponible 24/7 en Telegram</span>
-      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
+      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">¿No tienes Telegram? <a href="https://telegram.org/dl" target="_blank" rel="noopener" class="telegram-dl" style="color: var(--accent); text-decoration: underline;">Descárgalo gratis aquí</a> (1 min)</span>
     </div>
   </section>
 
@@ -1259,6 +1255,20 @@
     );
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Set Telegram download links to the correct app store based on platform
+    (function() {
+      var ua = navigator.userAgent || '';
+      var href;
+      if (/android/i.test(ua)) {
+        href = 'https://play.google.com/store/apps/details?id=org.telegram.messenger';
+      } else if (/iphone|ipad|ipod/i.test(ua)) {
+        href = 'https://apps.apple.com/app/telegram-messenger/id686449807';
+      }
+      if (href) {
+        document.querySelectorAll('.telegram-dl').forEach(function(a) { a.href = href; });
+      }
+    })();
 
     // Staggered reveal for grid items
     const staggerObserver = new IntersectionObserver(
