@@ -730,13 +730,19 @@
 
     .top-bar-links {
       display: flex;
-      gap: 0.5rem;
+      gap: 1.25rem;
       align-items: center;
       font-size: 0.85rem;
     }
 
-    .top-bar-links span {
+    .top-bar-links a {
       color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .top-bar-links a:hover {
+      color: var(--text);
     }
 
     /* ---- Footer ---- */
@@ -818,7 +824,8 @@
   <nav class="top-bar">
     <a href="/" class="top-bar-brand">Zenti Pro</a>
     <div class="top-bar-links">
-      <span>Para Empresas</span>
+      <a href="psicologos.html">Para psicólogos</a>
+      <a href="empresas.html">Para empresas</a>
     </div>
   </nav>
 
@@ -901,13 +908,12 @@
           <span class="chat-mockup-name">Zenti Pro</span>
         </div>
         <div class="chat-mockup-body">
-          <div class="chat-bubble bot">Hola, ¿cómo te sientes en este momento?</div>
-          <div class="chat-bubble user">Estoy muy estresado. Tenemos cierre de mes y siento que no voy a llegar con todo.</div>
-          <div class="chat-bubble bot">Entiendo. El cierre de mes puede ser muy demandante. ¿Qué es lo que más te pesa ahora mismo?</div>
-          <div class="chat-bubble user">Siento presión de todos lados. Mi jefe pide resultados, mi equipo necesita respuestas y yo no he dormido bien.</div>
-          <div class="chat-bubble bot">Es mucho cargar con todo eso. ¿Qué necesitas ahora: soltar la tensión, recuperar claridad, o simplemente un momento de calma?</div>
-          <div class="chat-bubble user">Necesito calmarme un momento. Solo 5 minutos para respirar.</div>
-          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación corta para ayudarte a soltar esa presión y encontrar calma. Un momento...</div>
+          <div class="chat-bubble user">Tengo una presentación importante la próxima semana. Me siento nervioso.</div>
+          <div class="chat-bubble bot">Es completamente normal sentirse así antes de algo importante. Cuéntame un poco más: ¿de qué se trata y qué es lo que más te preocupa?</div>
+          <div class="chat-bubble user">Voy a presentar mi proyecto a un cliente potencial. Sería un gran logro en mi carrera, pero no hago presentaciones a menudo y el cliente es muy exigente.</div>
+          <div class="chat-bubble bot">Una mezcla de emoción y miedo, es natural. ¿Qué es lo que más deseas que pase? ¿Cuál sería el resultado ideal?</div>
+          <div class="chat-bubble user">Cerrar al cliente. Que salga convencido del valor que ofrezco y haya buena química entre nosotros.</div>
+          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y cierras al cliente. Dame un momento...</div>
           <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
           <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
             <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>

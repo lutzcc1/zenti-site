@@ -957,6 +957,7 @@
       background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(184, 169, 232, 0.1));
       border-bottom: 1px solid rgba(184, 169, 232, 0.15);
       padding: 0.75rem 1.5rem;
+      padding-top: calc(0.75rem + 56px);
       text-align: center;
       font-size: 0.9rem;
       color: var(--text);
@@ -1038,6 +1039,49 @@
       }
     }
 
+    /* ---- Nav bar ---- */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(12, 15, 26, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .top-bar-brand {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .top-bar-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .top-bar-links a:hover {
+      color: var(--text);
+    }
+
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -1067,6 +1111,15 @@
   </style>
 </head>
 <body>
+
+  <!-- Top bar -->
+  <nav class="top-bar">
+    <a href="/" class="top-bar-brand">Zenti</a>
+    <div class="top-bar-links">
+      <a href="psicologos.html">Para psicólogos</a>
+      <a href="empresas.html">Para empresas</a>
+    </div>
+  </nav>
 
   <!-- App announcement banner -->
   <div class="announce-banner" id="announce-banner">
