@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0f1a">
+  <title>Zenti Pro para Empresas · Bienestar emocional para tu equipo</title>
+  <meta name="description" content="Fortalece la salud mental de tus colaboradores con meditaciones y ejercicios personalizados por IA. Cumple con la NOM-035. Garantía de 30 días.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Zenti Pro para Empresas · Bienestar emocional organizacional">
+  <meta property="og:description" content="Herramienta de bienestar emocional para empresas. Reflexiones y ejercicios personalizados con IA para cada colaborador.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH4YT1VEGE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TH4YT1VEGE');
+  </script>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0c0f1a;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --text: #ede9e3;
+      --text-muted: #a09a94;
+      --accent: #b8a9e8;
+      --accent-glow: rgba(184, 169, 232, 0.15);
+      --accent-border: rgba(184, 169, 232, 0.12);
+      --warm: #e8c4a0;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(184, 169, 232, 0.2);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    @supports (color: env(safe-area-inset-bottom)) {
+      body { padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    /* ---- Ambient background ---- */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .ambient .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #6c5ce7 0%, transparent 70%);
+      top: -10%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #e8a87c 0%, transparent 70%);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -10s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #81ecec 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      animation-delay: -5s;
+      opacity: 0.18;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -30px) scale(1.1); }
+    }
+
+    /* ---- Floating particles ---- */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { opacity: 0; transform: translateY(0) scale(0); }
+      10% { opacity: 0.85; }
+      50% { opacity: 0.7; }
+      90% { opacity: 0.25; }
+      100% { opacity: 0; transform: translateY(-100vh) scale(1); }
+    }
+
+    /* ---- Glow line divider ---- */
+    .glow-divider {
+      width: 100%;
+      max-width: 240px;
+      height: 1px;
+      margin: 0 auto 3.5rem;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--warm), var(--accent), transparent);
+      animation: glow-pulse 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .glow-divider::after {
+      content: '';
+      position: absolute;
+      inset: -4px 20%;
+      background: linear-gradient(90deg, transparent, rgba(184, 169, 232, 0.15), transparent);
+      filter: blur(6px);
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+      50% { opacity: 0.9; transform: scaleX(1); }
+    }
+
+    /* ---- Layout ---- */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    /* ---- Breathing circle ---- */
+    .breath-circle-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .breath-circle-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 169, 232, 0.08);
+      animation: breathe-outer 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe-outer {
+      0%, 100% { transform: scale(0.92); opacity: 0.4; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+
+    .breath-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 169, 232, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 6s ease-in-out infinite;
+      background: var(--accent-glow);
+    }
+
+    .breath-circle .inner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity: 0.6;
+      animation: breathe 6s ease-in-out infinite;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.85); opacity: 0.6; }
+      50% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .hero-inner {
+      animation: fadeUp 1s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .hero .section-label {
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    h1 strong {
+      font-weight: 700;
+      color: var(--warm);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 4vw, 2.3rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    h2 strong {
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--warm));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ---- CTA Button ---- */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.75rem;
+      background: linear-gradient(135deg, var(--accent) 0%, #9b8dd4 50%, var(--warm) 100%);
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+      color: var(--bg);
+      text-decoration: none;
+      border-radius: 100px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-position 0.5s ease;
+      box-shadow: 0 4px 30px rgba(184, 169, 232, 0.3);
+      animation: cta-pulse 5s ease-in-out infinite;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(184, 169, 232, 0.5), 0 0 80px rgba(184, 169, 232, 0.15);
+      background-position: 100% 50%;
+      animation: none;
+    }
+
+    .cta:active {
+      transform: translateY(-1px);
+    }
+
+    @keyframes cta-pulse {
+      0%, 85%, 100% { transform: scale(1); box-shadow: 0 4px 30px rgba(184, 169, 232, 0.3); }
+      92% { transform: scale(1.03); box-shadow: 0 8px 50px rgba(184, 169, 232, 0.45); }
+    }
+
+    .cta-hint {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .inline-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .inline-cta .cta {
+      font-size: 1rem;
+      padding: 0.95rem 2.25rem;
+    }
+
+    /* ---- Feature cards ---- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature-card {
+      padding: 1.75rem 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(184, 169, 232, 0.06);
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--warm);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- NOM-035 section ---- */
+    .nom-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 580px;
+      margin: 2rem auto 0;
+    }
+
+    .nom-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+
+    .nom-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .nom-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(184, 169, 232, 0.25);
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .nom-item p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---- What the employee sees (chat mockup) ---- */
+    .chat-mockup {
+      max-width: 360px;
+      margin: 3rem auto 0;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 80px rgba(184, 169, 232, 0.04);
+    }
+
+    .chat-mockup-header {
+      padding: 0.85rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-mockup-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .chat-mockup-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .chat-mockup-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: rgba(184, 169, 232, 0.18);
+      border-bottom-right-radius: 4px;
+      color: var(--text);
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom-left-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .chat-bubble.audio {
+      align-self: flex-start;
+      background: rgba(184, 169, 232, 0.12);
+      border-bottom-left-radius: 4px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .chat-bubble.audio:hover {
+      background: rgba(184, 169, 232, 0.18);
+    }
+
+    .chat-audio-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(184, 169, 232, 0.3);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-audio-bar-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.25s linear;
+    }
+
+    .chat-audio-play {
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: play-hint 2s ease-in-out 3;
+    }
+
+    .chat-bubble.audio.playing .chat-audio-play {
+      animation: none;
+    }
+
+    @keyframes play-hint {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .chat-audio-hint {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 0.5rem;
+      opacity: 0.6;
+    }
+
+    .chat-mockup-label {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ---- Values grid ---- */
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .value-item {
+      padding: 1.25rem;
+      border-radius: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+
+    .value-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .value-item h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--warm);
+      margin-bottom: 0.25rem;
+    }
+
+    .value-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- Guarantee ---- */
+    .guarantee {
+      text-align: center;
+    }
+
+    .guarantee-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .guarantee h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .guarantee h2 strong {
+      color: var(--warm);
+      -webkit-text-fill-color: var(--warm);
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+
+    .guarantee-text {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-top: 1.5rem;
+    }
+
+    /* ---- Highlight box ---- */
+    .highlight-box {
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      background: rgba(184, 169, 232, 0.06);
+      border: 1px solid rgba(184, 169, 232, 0.15);
+      text-align: center;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .highlight-box p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .highlight-box p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .highlight-box .warm {
+      color: var(--warm);
+      font-weight: 500;
+    }
+
+    /* ---- Nav bar ---- */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(12, 15, 26, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .top-bar-brand {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .top-bar-links span {
+      color: var(--text-muted);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(184, 169, 232, 0.3), transparent);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ---- Scroll reveal ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-stagger.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 600px) {
+      .breath-circle-wrapper {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1.5rem;
+      }
+      .breath-circle {
+        width: 80px;
+        height: 80px;
+      }
+      .breath-circle .inner {
+        width: 36px;
+        height: 36px;
+      }
+      h1 {
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <nav class="top-bar">
+    <a href="/" class="top-bar-brand">Zenti Pro</a>
+    <div class="top-bar-links">
+      <span>Para Empresas</span>
+    </div>
+  </nav>
+
+  <!-- Ambient background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="particles" aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="breath-circle-wrapper" aria-hidden="true">
+          <div class="breath-circle-outer"></div>
+          <div class="breath-circle">
+            <div class="inner"></div>
+          </div>
+        </div>
+        <p class="section-label">Zenti Pro para Empresas</p>
+        <h1>Bienestar emocional real<br>para <strong>tus colaboradores.</strong></h1>
+        <p class="subtitle">
+          ¿Tu organización ya cuenta con un beneficio que realmente impacte el bienestar emocional de sus colaboradores, incluso fuera del horario laboral?
+        </p>
+        <a href="mailto:hola@zenti.app" class="cta" onclick="gtag('event', 'cta_click', {location: 'empresas_hero'})">
+          Agenda una demo
+        </a>
+        <span class="cta-hint">Sin compromiso · Respondemos en 24 horas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es Zenti Pro -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Qué es Zenti Pro</p>
+        <h2 style="text-align:center;">Una prestación que <strong>realmente se usa.</strong></h2>
+        <p class="subtitle" style="text-align:center;">
+          Zenti Pro para Empresas es una herramienta para que las empresas otorguen a su equipo una forma efectiva de gestionar el estrés, la ansiedad y la presión en el momento exacto en que ocurren — sin depender de sesiones programadas o intervenciones tardías.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal-stagger">
+          <h3>Personalizado por IA</h3>
+          <p>Reflexiones y ejercicios de catarsis basados en el estado emocional real de cada colaborador.</p>
+        </div>
+        <div class="feature-card reveal-stagger">
+          <h3>Disponible 24/7</h3>
+          <p>Tu equipo puede acceder en cualquier momento — dentro o fuera del horario laboral.</p>
+        </div>
+        <div class="feature-card reveal-stagger">
+          <h3>Alineado a tu cultura</h3>
+          <p>La empresa define lineamientos, enfoques y temáticas alineadas a su cultura organizacional.</p>
+        </div>
+        <div class="feature-card reveal-stagger">
+          <h3>100% confidencial</h3>
+          <p>Protección total de la información del colaborador. Sin acceso a conversaciones individuales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué vive tu colaborador -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Qué vive tu colaborador</p>
+        <h2 style="text-align:center;">Así se siente usar <strong>Zenti Pro.</strong></h2>
+        <p class="subtitle" style="text-align:center;">Tu colaborador abre la app, le dice a Zenti cómo se siente, y recibe un ejercicio personalizado para ese momento.</p>
+      </div>
+      <div class="chat-mockup reveal">
+        <div class="chat-mockup-header">
+          <div class="chat-mockup-avatar">Z</div>
+          <span class="chat-mockup-name">Zenti Pro</span>
+        </div>
+        <div class="chat-mockup-body">
+          <div class="chat-bubble bot">Hola, ¿cómo te sientes en este momento?</div>
+          <div class="chat-bubble user">Estoy muy estresado. Tenemos cierre de mes y siento que no voy a llegar con todo.</div>
+          <div class="chat-bubble bot">Entiendo. El cierre de mes puede ser muy demandante. ¿Qué es lo que más te pesa ahora mismo?</div>
+          <div class="chat-bubble user">Siento presión de todos lados. Mi jefe pide resultados, mi equipo necesita respuestas y yo no he dormido bien.</div>
+          <div class="chat-bubble bot">Es mucho cargar con todo eso. ¿Qué necesitas ahora: soltar la tensión, recuperar claridad, o simplemente un momento de calma?</div>
+          <div class="chat-bubble user">Necesito calmarme un momento. Solo 5 minutos para respirar.</div>
+          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación corta para ayudarte a soltar esa presión y encontrar calma. Un momento...</div>
+          <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
+          <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
+            <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>
+            <span class="chat-audio-play" id="play-icon">▶</span>
+            <div class="chat-audio-bar"><div class="chat-audio-bar-progress" id="audio-progress"></div></div>
+            <span style="font-size: 0.75rem; opacity: 0.7;" id="audio-time">0:00</span>
+          </div>
+          <p class="chat-audio-hint">Dale play y escucha un ejemplo real</p>
+        </div>
+      </div>
+      <p class="chat-mockup-label">Esto es lo que tu colaborador experimenta — en cualquier momento, desde su celular.</p>
+    </div>
+  </section>
+
+  <!-- Propósito y Enfoque -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Propósito</p>
+        <h2 style="text-align:center;">Impulsar el bienestar emocional <strong>dentro de las organizaciones.</strong></h2>
+        <p class="subtitle" style="text-align:center;">
+          Fortaleciendo la salud mental de los colaboradores y contribuyendo a entornos laborales más sanos, productivos y sostenibles.
+        </p>
+      </div>
+      <div class="highlight-box reveal">
+        <p><strong>El bienestar organizacional no es un discurso, es una práctica constante.</strong></p>
+        <p style="margin-top: 0.75rem;">Zenti Pro integra tecnología, empatía y datos reales para atender las necesidades emocionales del talento humano de forma oportuna y escalable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOM-035 -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Beneficio clave</p>
+        <h2 style="text-align:center;">Cumplimiento de la <strong>NOM-035.</strong></h2>
+        <p class="subtitle" style="text-align:center;">Zenti Pro funciona como un aliado estratégico para las empresas al contribuir directamente al cumplimiento de la NOM-035-STPS-2018.</p>
+      </div>
+      <div class="nom-grid">
+        <div class="nom-item reveal-stagger">
+          <div class="nom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p>Herramientas prácticas para la gestión del estrés y factores de riesgo psicosocial</p>
+        </div>
+        <div class="nom-item reveal-stagger">
+          <div class="nom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <p>Prevenir el desgaste emocional (burnout) de forma proactiva</p>
+        </div>
+        <div class="nom-item reveal-stagger">
+          <div class="nom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <p>Fortalecer el clima organizacional y la retención de talento</p>
+        </div>
+        <div class="nom-item reveal-stagger">
+          <div class="nom-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <p>Generar evidencia de acciones enfocadas en el bienestar del colaborador</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Nuestros valores</p>
+        <h2 style="text-align:center;">Construido sobre <strong>principios reales.</strong></h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-item reveal-stagger">
+          <h3>Integridad</h3>
+          <p>Operación ética en todo momento</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Confiabilidad</h3>
+          <p>Resultados consistentes y medibles</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Confidencialidad</h3>
+          <p>Protección total de la información del colaborador</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Empatía</h3>
+          <p>Comprensión real del entorno laboral</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Calidez</h3>
+          <p>Experiencias humanas, no genéricas</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Innovación</h3>
+          <p>Tecnología aplicada al bienestar</p>
+        </div>
+        <div class="value-item reveal-stagger">
+          <h3>Calidad</h3>
+          <p>Alto estándar en cada interacción</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garantía -->
+  <section class="guarantee">
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <div class="guarantee-inner">
+          <p class="section-label">Garantía</p>
+          <h2>Si no cumple tus expectativas,<br><strong>te devolvemos tu inversión.</strong></h2>
+          <p class="guarantee-text">
+            Si Zenti Pro para Empresas no cumple con las expectativas de tu organización, se ofrece la devolución total de la inversión dentro de los primeros 30 días.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section style="text-align:center; padding-bottom: 4rem;">
+    <div class="container reveal">
+      <div class="highlight-box" style="margin-bottom: 3rem; margin-top: 0;">
+        <p><strong>Zenti Pro para Empresas no es solo un beneficio más.</strong></p>
+        <p style="margin-top: 0.5rem;">Es una herramienta estratégica para fortalecer la salud mental, mejorar el desempeño y construir una cultura organizacional sólida.</p>
+      </div>
+      <a href="mailto:hola@zenti.app" class="cta" onclick="gtag('event', 'cta_click', {location: 'empresas_bottom'})">
+        Agenda una demo para tu empresa
+      </a>
+      <span class="cta-hint">Escríbenos y te mostramos cómo funciona</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>hola@zenti.app</p>
+      <p style="margin-top: 0.35rem;">zentiapp.pro</p>
+      <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6;">Zenti — Meditaciones personalizadas con IA y clonación de voz</p>
+      <p style="margin-top: 0.75rem; font-size: 0.85rem; font-style: italic; color: var(--warm); opacity: 0.8;">Evoluciona el bienestar emocional en tu empresa.</p>
+      <p style="margin-top: 0.75rem;"><a href="/">Ir a zentiapp.pro</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Staggered reveal for grid items
+    const staggerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const parent = entry.target.parentElement;
+            const siblings = parent.querySelectorAll('.reveal-stagger');
+            siblings.forEach((el, i) => {
+              setTimeout(() => el.classList.add('visible'), i * 100);
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.reveal-stagger:first-child').forEach((el) =>
+      staggerObserver.observe(el)
+    );
+
+    // Floating particles
+    const particlesContainer = document.querySelector('.particles');
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.bottom = '-5px';
+      particle.style.width = (Math.random() * 3 + 2.5) + 'px';
+      particle.style.height = particle.style.width;
+      const duration = Math.random() * 12 + 10;
+      particle.style.animationDuration = duration + 's';
+      particle.style.animationDelay = '0s';
+      particlesContainer.appendChild(particle);
+      setTimeout(() => particle.remove(), duration * 1000);
+    }
+
+    setInterval(createParticle, 1800);
+    for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
+
+    // Sample audio player
+    const samplePlayer = document.getElementById('sample-player');
+    const sampleAudio = document.getElementById('sample-audio');
+    const playIcon = document.getElementById('play-icon');
+    const audioProgress = document.getElementById('audio-progress');
+    const audioTime = document.getElementById('audio-time');
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    sampleAudio.addEventListener('loadedmetadata', () => {
+      audioTime.textContent = formatTime(sampleAudio.duration);
+    });
+
+    samplePlayer.addEventListener('click', () => {
+      if (sampleAudio.paused) {
+        sampleAudio.play();
+        playIcon.textContent = '⏸';
+        samplePlayer.classList.add('playing');
+        gtag('event', 'sample_play', { location: 'empresas_chat_mockup' });
+      } else {
+        sampleAudio.pause();
+        playIcon.textContent = '▶';
+        samplePlayer.classList.remove('playing');
+      }
+    });
+
+    sampleAudio.addEventListener('timeupdate', () => {
+      if (sampleAudio.duration) {
+        const pct = (sampleAudio.currentTime / sampleAudio.duration) * 100;
+        audioProgress.style.width = pct + '%';
+        audioTime.textContent = formatTime(sampleAudio.currentTime);
+      }
+    });
+
+    sampleAudio.addEventListener('ended', () => {
+      playIcon.textContent = '▶';
+      audioProgress.style.width = '0%';
+      audioTime.textContent = formatTime(sampleAudio.duration);
+      samplePlayer.classList.remove('playing');
+    });
+  </script>
+</body>
+</html>
