@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0f1a">
+  <title>Zenti para Psicólogos · Meditaciones personalizadas con tu voz</title>
+  <meta name="description" content="Ofrece meditaciones personalizadas con IA y tu voz clonada a tus pacientes. Zenti es la herramienta clínica hecha para ti y tus pacientes.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Zenti para Psicólogos · Tu voz, tu marca, tu herramienta">
+  <meta property="og:description" content="Meditaciones personalizadas con IA y clonación de voz para terapeutas.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TH4YT1VEGE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TH4YT1VEGE');
+  </script>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0c0f1a;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --text: #ede9e3;
+      --text-muted: #a09a94;
+      --accent: #b8a9e8;
+      --accent-glow: rgba(184, 169, 232, 0.15);
+      --accent-border: rgba(184, 169, 232, 0.12);
+      --warm: #e8c4a0;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(184, 169, 232, 0.2);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    @supports (color: env(safe-area-inset-bottom)) {
+      body { padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    /* ---- Ambient background ---- */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .ambient .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, #6c5ce7 0%, transparent 70%);
+      top: -10%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #e8a87c 0%, transparent 70%);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -10s;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #81ecec 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      animation-delay: -5s;
+      opacity: 0.18;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -30px) scale(1.1); }
+    }
+
+    /* ---- Floating particles ---- */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { opacity: 0; transform: translateY(0) scale(0); }
+      10% { opacity: 0.85; }
+      50% { opacity: 0.7; }
+      90% { opacity: 0.25; }
+      100% { opacity: 0; transform: translateY(-100vh) scale(1); }
+    }
+
+    /* ---- Glow line divider ---- */
+    .glow-divider {
+      width: 100%;
+      max-width: 240px;
+      height: 1px;
+      margin: 0 auto 3.5rem;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--warm), var(--accent), transparent);
+      animation: glow-pulse 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    .glow-divider::after {
+      content: '';
+      position: absolute;
+      inset: -4px 20%;
+      background: linear-gradient(90deg, transparent, rgba(184, 169, 232, 0.15), transparent);
+      filter: blur(6px);
+      animation: glow-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+      50% { opacity: 0.9; transform: scaleX(1); }
+    }
+
+    /* ---- Layout ---- */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .container-wide {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    /* ---- Breathing circle ---- */
+    .breath-circle-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .breath-circle-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 169, 232, 0.08);
+      animation: breathe-outer 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe-outer {
+      0%, 100% { transform: scale(0.92); opacity: 0.4; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+
+    .breath-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid rgba(184, 169, 232, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: breathe 6s ease-in-out infinite;
+      background: var(--accent-glow);
+    }
+
+    .breath-circle .inner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity: 0.6;
+      animation: breathe 6s ease-in-out infinite;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.85); opacity: 0.6; }
+      50% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .hero-inner {
+      animation: fadeUp 1s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .hero .section-label {
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    h1 strong {
+      font-weight: 700;
+      color: var(--warm);
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 4vw, 2.3rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    h2 strong {
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--warm));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero .subtitle {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-question {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 0;
+      font-weight: 300;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ---- CTA Button ---- */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.75rem;
+      background: linear-gradient(135deg, var(--accent) 0%, #9b8dd4 50%, var(--warm) 100%);
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+      color: var(--bg);
+      text-decoration: none;
+      border-radius: 100px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-position 0.5s ease;
+      box-shadow: 0 4px 30px rgba(184, 169, 232, 0.3);
+      animation: cta-pulse 5s ease-in-out infinite;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(184, 169, 232, 0.5), 0 0 80px rgba(184, 169, 232, 0.15);
+      background-position: 100% 50%;
+      animation: none;
+    }
+
+    .cta:active {
+      transform: translateY(-1px);
+    }
+
+    @keyframes cta-pulse {
+      0%, 85%, 100% { transform: scale(1); box-shadow: 0 4px 30px rgba(184, 169, 232, 0.3); }
+      92% { transform: scale(1.03); box-shadow: 0 8px 50px rgba(184, 169, 232, 0.45); }
+    }
+
+    .cta-hint {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .inline-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .inline-cta .cta {
+      font-size: 1rem;
+      padding: 0.95rem 2.25rem;
+    }
+
+    /* ---- Solution cards ---- */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .solution-card {
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+
+    .solution-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(184, 169, 232, 0.06);
+    }
+
+    .solution-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: 50%;
+      justify-self: center;
+    }
+
+    .solution-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--warm);
+      margin-bottom: 0.35rem;
+    }
+
+    .solution-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .solution-grid {
+        grid-template-columns: 1fr;
+      }
+      .solution-card:last-child:nth-child(odd) {
+        max-width: 100%;
+      }
+    }
+
+    /* ---- Steps ---- */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 580px;
+      margin: 2.5rem auto 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      text-align: left;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid rgba(184, 169, 232, 0.25);
+      background: var(--accent-glow);
+    }
+
+    .step-item h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-item p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .step-highlight {
+      margin-top: 2rem;
+      padding: 1.25rem 1.75rem;
+      border-radius: 16px;
+      background: rgba(184, 169, 232, 0.06);
+      border: 1px solid rgba(184, 169, 232, 0.15);
+      text-align: center;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .step-highlight h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--warm);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-highlight p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ---- Pricing ---- */
+    .pricing {
+      text-align: center;
+    }
+
+    .pricing-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    .pricing-card {
+      padding: 2.25rem 1.5rem;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+      position: relative;
+      text-align: left;
+    }
+
+    .pricing-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(184, 169, 232, 0.08);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(184, 169, 232, 0.3);
+      background: rgba(184, 169, 232, 0.06);
+      box-shadow: 0 0 40px rgba(184, 169, 232, 0.08);
+    }
+
+    .pricing-card.featured:hover {
+      border-color: rgba(184, 169, 232, 0.4);
+      box-shadow: 0 16px 50px rgba(184, 169, 232, 0.15);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -0.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent), #9b8dd4);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.75rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .pricing-card .pricing-target {
+      font-size: 0.8rem;
+      color: var(--warm);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .pricing-price {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+
+    .pricing-price span {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .pricing-features li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .pricing-note-box {
+      margin-top: 2rem;
+      padding: 1.25rem 1.75rem;
+      border-radius: 16px;
+      background: rgba(184, 169, 232, 0.06);
+      border: 1px solid rgba(184, 169, 232, 0.15);
+      text-align: center;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-note-box p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .pricing-note-box p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pricing-note-box .math {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--warm);
+      font-weight: 500;
+    }
+
+    /* ---- Comparison table ---- */
+    .comparison {
+      text-align: center;
+    }
+
+    .comparison-table {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto 0;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .comparison-table thead th {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table thead th:last-child {
+      color: var(--warm);
+      font-weight: 600;
+    }
+
+    .comparison-table tbody td {
+      padding: 0.65rem 1rem;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table tbody td:first-child {
+      font-weight: 500;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px 0 0 8px;
+    }
+
+    .comparison-table tbody td:nth-child(2) {
+      color: var(--text-muted);
+    }
+
+    .comparison-table tbody td:last-child {
+      color: var(--warm);
+      font-weight: 500;
+    }
+
+    /* ---- FAQ accordion ---- */
+    .faq {
+      text-align: center;
+    }
+
+    .faq-list {
+      max-width: 600px;
+      margin: 2rem auto 0;
+      text-align: left;
+    }
+
+    .faq-list details {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-card);
+      margin-bottom: 0.75rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .faq-list details:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .faq-list details[open] {
+      border-color: rgba(184, 169, 232, 0.25);
+      box-shadow: 0 4px 20px rgba(184, 169, 232, 0.05);
+    }
+
+    .faq-list summary {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .faq-list summary::-webkit-details-marker { display: none; }
+
+    .faq-list summary::after {
+      content: '+';
+      font-size: 1.3rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-list details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-list .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---- Guarantee ---- */
+    .guarantee {
+      text-align: center;
+    }
+
+    .guarantee-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .guarantee h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .guarantee h2 strong {
+      color: var(--warm);
+      -webkit-text-fill-color: var(--warm);
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+
+    .guarantee-points {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .guarantee-points li {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(184, 169, 232, 0.3), transparent);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer .footer-links {
+      margin-top: 0.75rem;
+    }
+
+    footer .footer-links a {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* ---- Scroll reveal ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-stagger.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- Nav bar ---- */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(12, 15, 26, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .top-bar-brand {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .top-bar-links {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .top-bar-links span {
+      color: var(--text-muted);
+    }
+
+    .top-bar-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .top-bar-links a:hover {
+      color: var(--text);
+    }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 600px) {
+      .breath-circle-wrapper {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1.5rem;
+      }
+      .breath-circle {
+        width: 80px;
+        height: 80px;
+      }
+      .breath-circle .inner {
+        width: 36px;
+        height: 36px;
+      }
+      h1 {
+        font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+      }
+      .subtitle {
+        font-size: 0.95rem;
+      }
+      .comparison-table {
+        font-size: 0.85rem;
+      }
+      .comparison-table thead th,
+      .comparison-table tbody td {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <nav class="top-bar">
+    <a href="/" class="top-bar-brand">Zenti</a>
+    <div class="top-bar-links">
+      <span>zentiapp.pro</span>
+    </div>
+  </nav>
+
+  <!-- Ambient background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="particles" aria-hidden="true"></div>
+
+  <!-- Hero: El Problema -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="breath-circle-wrapper" aria-hidden="true">
+          <div class="breath-circle-outer"></div>
+          <div class="breath-circle">
+            <div class="inner"></div>
+          </div>
+        </div>
+        <p class="section-label">El problema</p>
+        <h1>Entre sesión y sesión,<br><strong>pierdes a tus pacientes.</strong></h1>
+        <p class="subtitle">
+          La mayoría de los pacientes llegan a terapia una vez por semana — o cada quince
+          días. Entre una sesión y otra, el progreso se diluye. No practican lo que trabajaron
+          juntos. Y cuando vuelven, hay que reconstruir el momentum.
+        </p>
+        <p class="hero-question">
+          ¿Y si pudieras estar presente entre sesiones — con tu propia voz — guiando a cada
+          paciente por una meditación adaptada a lo que están viviendo?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- La Solución -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">La solución</p>
+        <h2>Zenti hace esto posible.</h2>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card reveal-stagger">
+          <h3>Personalización con IA</h3>
+          <p>Cada meditación se adapta al estado emocional del paciente.</p>
+        </div>
+        <div class="solution-card reveal-stagger">
+          <h3>Tu voz, clonada</h3>
+          <p>Tu paciente escucha a su terapeuta, no a un extraño.</p>
+        </div>
+        <div class="solution-card reveal-stagger">
+          <h3>Tú defines el contenido</h3>
+          <p>Tú decides las técnicas, enfoques y tono. El criterio clínico es tuyo.</p>
+        </div>
+        <div class="solution-card reveal-stagger">
+          <h3>Tu marca, tu herramienta</h3>
+          <p>Tu paciente recibe la herramienta con tu nombre y tu marca.</p>
+        </div>
+        <div class="solution-card reveal-stagger">
+          <h3>Retención real</h3>
+          <p>Menos abandonos. Una sesión recuperada al mes paga la inversión.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo Funciona -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Cómo funciona</p>
+        <h2 style="text-align:center;">Simple para ti. <strong>Mágico para tu paciente.</strong></h2>
+      </div>
+      <div class="steps-list">
+        <div class="step-item reveal-stagger">
+          <div class="step-number">01</div>
+          <div>
+            <h3>Clonamos tu voz</h3>
+            <p>Con solo unos minutos de audio, nuestra IA aprende tu voz. Una réplica fiel de tu tono, cadencia y calidez.</p>
+          </div>
+        </div>
+        <div class="step-item reveal-stagger">
+          <div class="step-number">02</div>
+          <div>
+            <h3>Tú defines las reglas</h3>
+            <p>Configuras qué tipo de meditaciones reciben tus pacientes: técnicas, enfoques, tono. El criterio clínico siempre es tuyo.</p>
+          </div>
+        </div>
+        <div class="step-item reveal-stagger">
+          <div class="step-number">03</div>
+          <div>
+            <h3>Tu paciente abre la app</h3>
+            <p>Descarga Zenti en iOS o Android — con tu marca. Sin cuentas complicadas.</p>
+          </div>
+        </div>
+        <div class="step-item reveal-stagger">
+          <div class="step-number">04</div>
+          <div>
+            <h3>La IA pregunta cómo se siente</h3>
+            <p>Zenti inicia una conversación empática para entender el estado emocional actual del paciente.</p>
+          </div>
+        </div>
+        <div class="step-item reveal-stagger">
+          <div class="step-number">05</div>
+          <div>
+            <h3>Meditación única generada</h3>
+            <p>En segundos, la IA crea una meditación personalizada — narrada con tu voz, dentro de los parámetros que tú definiste.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step-highlight reveal">
+        <h3>Cero trabajo operativo para ti.</h3>
+        <p>Zenti funciona 24/7. Solo recoge los frutos en tu siguiente sesión.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes y Precios -->
+  <section class="pricing">
+    <div class="container-wide">
+      <div class="reveal">
+        <p class="section-label">Planes y precios</p>
+        <h2>Invierte el precio de <strong>una sesión.</strong></h2>
+        <p class="pricing-subtitle">Todos tus pacientes reciben meditaciones personalizadas con tu voz.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal-stagger">
+          <h3>Esencial</h3>
+          <p class="pricing-target">Ciudades medianas</p>
+          <p class="pricing-price">$700<span>/mes</span></p>
+          <ul class="pricing-features">
+            <li>Hasta 30 med/mes</li>
+            <li>Hasta 12 pacientes</li>
+            <li>Voz IA de alta calidad</li>
+            <li>Personalización emocional</li>
+            <li>App iOS y Android</li>
+            <li>Tu marca</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured reveal-stagger">
+          <div class="pricing-badge">Recomendado</div>
+          <h3>Profesional</h3>
+          <p class="pricing-target">El más popular</p>
+          <p class="pricing-price">$1,500<span>/mes</span></p>
+          <ul class="pricing-features">
+            <li>Hasta 60 med/mes</li>
+            <li>Hasta 25 pacientes</li>
+            <li>Tu voz clonada</li>
+            <li>Personalización emocional</li>
+            <li>App iOS y Android</li>
+            <li>Tu marca</li>
+            <li>Soporte prioritario</li>
+          </ul>
+        </div>
+        <div class="pricing-card reveal-stagger">
+          <h3>Clínica</h3>
+          <p class="pricing-target">Clínicas y equipos</p>
+          <p class="pricing-price">$3,000<span>/mes</span></p>
+          <ul class="pricing-features">
+            <li>Hasta 150 med/mes</li>
+            <li>Pacientes ilimitados</li>
+            <li>Múltiples voces</li>
+            <li>Personalización emocional</li>
+            <li>App iOS y Android</li>
+            <li>Tu marca</li>
+            <li>Analíticos de uso</li>
+            <li>Soporte dedicado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pricing-note-box reveal">
+        <p><strong>¿$1,500 al mes? Haz la cuenta.</strong></p>
+        <p>Si retener a un paciente una sesión más te genera $1,500, se paga solo.</p>
+        <p class="math">$1,500 ÷ 25 pacientes = $60 MXN por paciente al mes</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por qué Zenti -->
+  <section class="comparison">
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Por qué Zenti</p>
+        <h2>Esto no es Calm. <strong>No es Headspace.</strong></h2>
+        <p class="subtitle">Es una herramienta clínica hecha para ti y tus pacientes.</p>
+      </div>
+      <table class="comparison-table reveal">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Apps genéricas</th>
+            <th>Zenti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Contenido</td>
+            <td>Igual para todos</td>
+            <td>Personalizado por IA</td>
+          </tr>
+          <tr>
+            <td>Voz</td>
+            <td>Narrador desconocido</td>
+            <td>La voz de su terapeuta</td>
+          </tr>
+          <tr>
+            <td>Marca</td>
+            <td>La app se lleva el crédito</td>
+            <td>Tu nombre, tu marca</td>
+          </tr>
+          <tr>
+            <td>Control clínico</td>
+            <td>Ninguno</td>
+            <td>Tú defines todo</td>
+          </tr>
+          <tr>
+            <td>Adaptación</td>
+            <td>Categorías fijas</td>
+            <td>Responde al estado actual</td>
+          </tr>
+          <tr>
+            <td>Acceso</td>
+            <td>App genérica</td>
+            <td>Tu app en iOS/Android</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section class="faq">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Preguntas frecuentes</p>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>¿Mis pacientes necesitan descargar algo?</summary>
+          <div class="faq-answer">Solo tu app en iOS o Android. Sin cuentas complicadas. Les compartes el link y listo.</div>
+        </details>
+        <details>
+          <summary>¿La voz clonada suena real?</summary>
+          <div class="faq-answer">Sí. Usamos la tecnología más avanzada de síntesis de voz. Suena natural y reconocible.</div>
+        </details>
+        <details>
+          <summary>¿Yo controlo el contenido?</summary>
+          <div class="faq-answer">Completamente. Tú defines las técnicas, el enfoque y el estilo. La IA genera dentro de esos parámetros.</div>
+        </details>
+        <details>
+          <summary>¿Es seguro para mis pacientes?</summary>
+          <div class="faq-answer">Encriptación de nivel médico. No almacenamos conversaciones de terapia ni info sensible.</div>
+        </details>
+        <details>
+          <summary>¿Cuánto tardo en empezar?</summary>
+          <div class="faq-answer">48 horas. Nos envías un audio, configuramos tu cuenta, y en dos días tus pacientes meditan con tu voz.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garantía -->
+  <section class="guarantee">
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <div class="guarantee-inner">
+          <p class="section-label">Nuestra garantía</p>
+          <h2>Si no te convence,<br><strong>te devolvemos tu dinero.</strong></h2>
+          <ul class="guarantee-points">
+            <li>Garantía de devolución de 30 días — sin preguntas</li>
+            <li>Cancela en cualquier momento — sin contratos</li>
+            <li>Tu primera meditación con voz clonada en 48 horas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta" style="text-align:center; padding-bottom: 4rem;">
+    <div class="container reveal">
+      <a href="mailto:hola@zenti.app" class="cta" onclick="gtag('event', 'cta_click', {location: 'b2b_bottom'})">
+        Quiero Zenti para mi consulta
+      </a>
+      <span class="cta-hint">Escríbenos y te configuramos todo en 48 horas</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>hola@zenti.app</p>
+      <p style="margin-top: 0.35rem;">zentiapp.pro</p>
+      <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6;">Zenti — Meditaciones personalizadas con IA y clonación de voz</p>
+      <div class="footer-links" style="margin-top: 0.5rem;">
+        <a href="/">Ir a zentiapp.pro</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Staggered reveal for grid items
+    const staggerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const parent = entry.target.parentElement;
+            const siblings = parent.querySelectorAll('.reveal-stagger');
+            siblings.forEach((el, i) => {
+              setTimeout(() => el.classList.add('visible'), i * 100);
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.reveal-stagger:first-child').forEach((el) =>
+      staggerObserver.observe(el)
+    );
+
+    // Floating particles
+    const particlesContainer = document.querySelector('.particles');
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.bottom = '-5px';
+      particle.style.width = (Math.random() * 3 + 2.5) + 'px';
+      particle.style.height = particle.style.width;
+      const duration = Math.random() * 12 + 10;
+      particle.style.animationDuration = duration + 's';
+      particle.style.animationDelay = '0s';
+      particlesContainer.appendChild(particle);
+      setTimeout(() => particle.remove(), duration * 1000);
+    }
+
+    setInterval(createParticle, 1800);
+    for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
+
+    // FAQ open tracking
+    document.querySelectorAll('.faq-list details').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          gtag('event', 'faq_open', {
+            question: detail.querySelector('summary').textContent,
+            page: 'psicologos'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
