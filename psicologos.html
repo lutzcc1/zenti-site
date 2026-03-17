@@ -701,6 +701,141 @@
       font-weight: 500;
     }
 
+    /* ---- Zenti Pro section ---- */
+    .zenti-pro-intro {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .zenti-pro-intro .intro-bullets {
+      list-style: none;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .zenti-pro-intro .intro-bullets li {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .zenti-pro-intro .intro-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .zenti-pro-pillars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      max-width: 720px;
+      margin: 2.5rem auto 0;
+    }
+
+    .pillar-card {
+      padding: 1.75rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-align: left;
+      transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(184, 169, 232, 0.06);
+    }
+
+    .pillar-card .pillar-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--warm);
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .pillar-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .value-item {
+      padding: 0.75rem;
+      border-radius: 12px;
+      background: rgba(184, 169, 232, 0.04);
+      border: 1px solid rgba(184, 169, 232, 0.08);
+      text-align: center;
+    }
+
+    .value-item strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .value-item span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .zenti-pro-closing {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .zenti-pro-closing .tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .zenti-pro-pillars {
+        grid-template-columns: 1fr;
+      }
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     /* ---- FAQ accordion ---- */
     .faq {
       text-align: center;
@@ -887,13 +1022,9 @@
 
     .top-bar-links {
       display: flex;
-      gap: 0.5rem;
+      gap: 1.25rem;
       align-items: center;
       font-size: 0.85rem;
-    }
-
-    .top-bar-links span {
-      color: var(--text-muted);
     }
 
     .top-bar-links a {
@@ -1084,7 +1215,8 @@
   <nav class="top-bar">
     <a href="/" class="top-bar-brand">Zenti</a>
     <div class="top-bar-links">
-      <span>zentiapp.pro</span>
+      <a href="psicologos.html">Para psicólogos</a>
+      <a href="empresas.html">Para empresas</a>
     </div>
   </nav>
 
@@ -1170,13 +1302,12 @@
           <span class="chat-mockup-name">Tu consulta · Zenti</span>
         </div>
         <div class="chat-mockup-body">
-          <div class="chat-bubble bot">Hola, ¿cómo te sientes hoy?</div>
-          <div class="chat-bubble user">Tuve un día muy pesado en el trabajo. Siento que no puedo con todo.</div>
-          <div class="chat-bubble bot">Entiendo. Cuéntame un poco más: ¿qué es lo que más te pesa ahora mismo?</div>
-          <div class="chat-bubble user">Mi jefe me presiona mucho y siento que nunca es suficiente. Estoy agotada mentalmente.</div>
-          <div class="chat-bubble bot">Es normal sentirse así. ¿Qué necesitas en este momento? ¿Soltar esa tensión, encontrar claridad, o simplemente descansar la mente?</div>
-          <div class="chat-bubble user">Necesito soltar. Dejar de pensar un rato.</div>
-          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para ayudarte a soltar esa carga y encontrar calma. Dame un momento...</div>
+          <div class="chat-bubble user">Tengo una presentación importante la próxima semana. Me siento nervioso.</div>
+          <div class="chat-bubble bot">Es completamente normal sentirse así antes de algo importante. Cuéntame un poco más: ¿de qué se trata y qué es lo que más te preocupa?</div>
+          <div class="chat-bubble user">Voy a presentar mi proyecto a un cliente potencial. Sería un gran logro en mi carrera, pero no hago presentaciones a menudo y el cliente es muy exigente.</div>
+          <div class="chat-bubble bot">Una mezcla de emoción y miedo, es natural. ¿Qué es lo que más deseas que pase? ¿Cuál sería el resultado ideal?</div>
+          <div class="chat-bubble user">Cerrar al cliente. Que salga convencido del valor que ofrezco y haya buena química entre nosotros.</div>
+          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y cierras al cliente. Dame un momento...</div>
           <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
           <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
             <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>
@@ -1354,6 +1485,90 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- Zenti Pro para Psicólogos y Terapeutas -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <div class="zenti-pro-intro">
+          <p class="section-label">Conoce Zenti Pro</p>
+          <h2>Zenti Pro para Psicólogos <strong>y Terapeutas</strong></h2>
+          <ul class="intro-bullets">
+            <li>¿Te imaginas poder acompañar a tus pacientes fuera de la consulta, donde quiera que estén?</li>
+            <li>¿Te imaginas poder ayudarlos a manejar esos momentos de crisis, cuando más te necesitan?</li>
+            <li>Zenti Pro te da la posibilidad de hacerlo. Aprovechando el potencial de la IA, podrás crear reflexiones y ejercicios terapéuticos de catarsis personalizados para cada uno de ellos, guiados con tu voz — tu voz les da paz, les da confianza, los tranquiliza — así podrás ayudarlos a recuperar la calma justo en el momento que lo requieren.</li>
+            <li>Tú marcas las reglas, tú defines los parámetros y tú indicas los temas con base en las necesidades específicas de cada paciente.</li>
+            <li>Te invitamos a actualizarte y romper paradigmas. Con Zenti Pro para Psicólogos y Terapeutas como aliado, podrás mejorar la práctica de tu profesión llevándola al siguiente nivel.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="zenti-pro-pillars">
+        <div class="pillar-card reveal-stagger">
+          <p class="pillar-number">01 — Nuestro Propósito</p>
+          <h3>Modernizar las herramientas terapéuticas</h3>
+          <p>Buscamos modernizar las herramientas terapéuticas y la imagen del profesional de la salud mental. Nuestra misión es potenciar la conexión entre psicólogo y paciente, transformando su experiencia conjunta en un proceso más fluido, humano y eficiente.</p>
+        </div>
+        <div class="pillar-card reveal-stagger">
+          <p class="pillar-number">02 — Nuestra Filosofía</p>
+          <h3>Crecemos contigo</h3>
+          <p>Creemos en la creación colectiva de valor: cada mejora en nuestra plataforma es un paso hacia la excelencia en la práctica clínica.</p>
+        </div>
+        <div class="pillar-card reveal-stagger">
+          <p class="pillar-number">03 — Beneficio Exclusivo</p>
+          <h3>Co-creación</h3>
+          <p>Al ser uno de nuestros usuarios pioneros, tendremos el privilegio de moldear junto contigo a Zenti Pro para Psicólogos y Terapeutas. Tus requerimientos y recomendaciones serán el motor de nuestras actualizaciones, logrando una herramienta diseñada prácticamente a tu medida.</p>
+        </div>
+        <div class="pillar-card reveal-stagger">
+          <p class="pillar-number">05 — Garantía Premium</p>
+          <h3>Tu tranquilidad es nuestra prioridad</h3>
+          <p>Si Zenti Pro para Psicólogos y Terapeutas no cumple con tus expectativas o necesidades, te garantizamos la devolución total de tu inversión en un máximo de 30 días, sin preguntas ni complicaciones.</p>
+        </div>
+        <div class="pillar-card full-width reveal-stagger">
+          <p class="pillar-number">04 — Nuestros Valores</p>
+          <h3>Los principios que nos guían</h3>
+          <div class="values-grid">
+            <div class="value-item">
+              <strong>Integridad</strong>
+              <span>Rectitud en cada proceso</span>
+            </div>
+            <div class="value-item">
+              <strong>Confiabilidad</strong>
+              <span>Honramos cada compromiso</span>
+            </div>
+            <div class="value-item">
+              <strong>Confidencialidad</strong>
+              <span>Seguridad absoluta</span>
+            </div>
+            <div class="value-item">
+              <strong>Empatía</strong>
+              <span>Sensibilidad terapéutica</span>
+            </div>
+            <div class="value-item">
+              <strong>Calidez</strong>
+              <span>Trato humano y cercano</span>
+            </div>
+            <div class="value-item">
+              <strong>Innovación</strong>
+              <span>Evolución constante</span>
+            </div>
+            <div class="value-item">
+              <strong>Calidad</strong>
+              <span>Excelencia en soporte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zenti-pro-closing reveal">
+        <a href="mailto:hola@zenti.app" class="cta" onclick="gtag('event', 'cta_click', {location: 'zenti_pro_section'})">
+          Conoce nuestros servicios
+        </a>
+        <p class="tagline">zentiapp.pro — evolucionamos la práctica de la psicología.</p>
+      </div>
     </div>
   </section>
 
