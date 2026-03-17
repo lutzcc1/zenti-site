@@ -906,6 +906,146 @@
       color: var(--text);
     }
 
+    /* ---- Chat mockup ---- */
+    .chat-mockup {
+      max-width: 360px;
+      margin: 3rem auto 0;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 80px rgba(184, 169, 232, 0.04);
+    }
+
+    .chat-mockup-header {
+      padding: 0.85rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-mockup-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .chat-mockup-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .chat-mockup-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: rgba(184, 169, 232, 0.18);
+      border-bottom-right-radius: 4px;
+      color: var(--text);
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom-left-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .chat-bubble.audio {
+      align-self: flex-start;
+      background: rgba(184, 169, 232, 0.12);
+      border-bottom-left-radius: 4px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .chat-bubble.audio:hover {
+      background: rgba(184, 169, 232, 0.18);
+    }
+
+    .chat-audio-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(184, 169, 232, 0.3);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-audio-bar-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.25s linear;
+    }
+
+    .chat-audio-play {
+      font-size: 1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: play-hint 2s ease-in-out 3;
+    }
+
+    .chat-bubble.audio.playing .chat-audio-play {
+      animation: none;
+    }
+
+    @keyframes play-hint {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .chat-audio-hint {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 0.5rem;
+      opacity: 0.6;
+    }
+
+    .chat-mockup-label {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
     /* ---- Mobile ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -1012,6 +1152,42 @@
           <p>Menos abandonos. Una sesión recuperada al mes paga la inversión.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Qué vive tu paciente -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+        <p class="section-label">Qué vive tu paciente</p>
+        <h2 style="text-align:center;">Esto es lo que experimenta<br><strong>entre sesión y sesión.</strong></h2>
+        <p class="subtitle" style="text-align:center;">Tu paciente abre la app con tu marca, le cuenta a Zenti cómo se siente, y recibe una meditación personalizada — narrada con tu voz.</p>
+      </div>
+      <div class="chat-mockup reveal">
+        <div class="chat-mockup-header">
+          <div class="chat-mockup-avatar">Z</div>
+          <span class="chat-mockup-name">Tu consulta · Zenti</span>
+        </div>
+        <div class="chat-mockup-body">
+          <div class="chat-bubble bot">Hola, ¿cómo te sientes hoy?</div>
+          <div class="chat-bubble user">Tuve un día muy pesado en el trabajo. Siento que no puedo con todo.</div>
+          <div class="chat-bubble bot">Entiendo. Cuéntame un poco más: ¿qué es lo que más te pesa ahora mismo?</div>
+          <div class="chat-bubble user">Mi jefe me presiona mucho y siento que nunca es suficiente. Estoy agotada mentalmente.</div>
+          <div class="chat-bubble bot">Es normal sentirse así. ¿Qué necesitas en este momento? ¿Soltar esa tensión, encontrar claridad, o simplemente descansar la mente?</div>
+          <div class="chat-bubble user">Necesito soltar. Dejar de pensar un rato.</div>
+          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para ayudarte a soltar esa carga y encontrar calma. Dame un momento...</div>
+          <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
+          <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
+            <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>
+            <span class="chat-audio-play" id="play-icon">▶</span>
+            <div class="chat-audio-bar"><div class="chat-audio-bar-progress" id="audio-progress"></div></div>
+            <span style="font-size: 0.75rem; opacity: 0.7;" id="audio-time">0:00</span>
+          </div>
+          <p class="chat-audio-hint">Dale play y escucha un ejemplo real</p>
+        </div>
+      </div>
+      <p class="chat-mockup-label">Así se ve la experiencia de tu paciente en la app — con tu voz y tu marca.</p>
     </div>
   </section>
 
@@ -1306,6 +1482,51 @@
 
     setInterval(createParticle, 1800);
     for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
+
+    // Sample audio player
+    const samplePlayer = document.getElementById('sample-player');
+    const sampleAudio = document.getElementById('sample-audio');
+    const playIcon = document.getElementById('play-icon');
+    const audioProgress = document.getElementById('audio-progress');
+    const audioTime = document.getElementById('audio-time');
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    sampleAudio.addEventListener('loadedmetadata', () => {
+      audioTime.textContent = formatTime(sampleAudio.duration);
+    });
+
+    samplePlayer.addEventListener('click', () => {
+      if (sampleAudio.paused) {
+        sampleAudio.play();
+        playIcon.textContent = '⏸';
+        samplePlayer.classList.add('playing');
+        gtag('event', 'sample_play', { location: 'b2b_chat_mockup' });
+      } else {
+        sampleAudio.pause();
+        playIcon.textContent = '▶';
+        samplePlayer.classList.remove('playing');
+      }
+    });
+
+    sampleAudio.addEventListener('timeupdate', () => {
+      if (sampleAudio.duration) {
+        const pct = (sampleAudio.currentTime / sampleAudio.duration) * 100;
+        audioProgress.style.width = pct + '%';
+        audioTime.textContent = formatTime(sampleAudio.currentTime);
+      }
+    });
+
+    sampleAudio.addEventListener('ended', () => {
+      playIcon.textContent = '▶';
+      audioProgress.style.width = '0%';
+      audioTime.textContent = formatTime(sampleAudio.duration);
+      samplePlayer.classList.remove('playing');
+    });
 
     // FAQ open tracking
     document.querySelectorAll('.faq-list details').forEach(detail => {
