@@ -612,11 +612,11 @@
 
     /* ---- Chat mockup ---- */
     .chat-mockup {
-      max-width: 360px;
+      max-width: 340px;
       margin: 3.5rem auto 0;
       border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(12, 15, 26, 0.9);
       overflow: hidden;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -624,71 +624,137 @@
     }
 
     .chat-mockup-header {
-      padding: 0.85rem 1.15rem;
+      padding: 0.7rem 1rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: space-between;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       background: rgba(255, 255, 255, 0.02);
     }
 
-    .chat-mockup-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--accent-glow);
-      border: 1px solid rgba(184, 169, 232, 0.3);
+    .chat-mockup-header-left {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
+      gap: 0.5rem;
+    }
+
+    .chat-mockup-orb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(232, 196, 160, 0.9), rgba(184, 169, 232, 0.6) 55%, rgba(12, 15, 26, 0.1) 100%);
+      border: 1px solid rgba(184, 169, 232, 0.3);
+      box-shadow: 0 0 12px rgba(184, 169, 232, 0.2);
+      animation: mock-breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes mock-breathe {
+      0%, 100% { transform: scale(0.92); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 1; }
     }
 
     .chat-mockup-name {
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .chat-mockup-exit {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.6;
     }
 
     .chat-mockup-body {
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    .chat-bubble {
-      max-width: 80%;
-      padding: 0.65rem 0.9rem;
-      border-radius: 16px;
-      font-size: 0.85rem;
-      line-height: 1.5;
+    .chat-mockup-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
     }
 
-    .chat-bubble.user {
-      align-self: flex-end;
-      background: rgba(184, 169, 232, 0.18);
-      border-bottom-right-radius: 4px;
+    .chat-mockup-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(184, 169, 232, 0.7);
+    }
+
+    .chat-mockup-dot.active {
+      width: 18px;
+      background: linear-gradient(135deg, var(--accent), #e8c4a0);
+      box-shadow: 0 0 10px rgba(184, 169, 232, 0.2);
+    }
+
+    .chat-mockup-exchange {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .chat-mockup-exchange + .chat-mockup-exchange {
+      padding-top: 0.35rem;
+    }
+
+    .chat-question {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(184, 169, 232, 0.1);
+      border-radius: 14px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.82rem;
+      line-height: 1.45;
       color: var(--text);
     }
 
-    .chat-bubble.bot {
-      align-self: flex-start;
-      background: rgba(255, 255, 255, 0.06);
-      border-bottom-left-radius: 4px;
+    .chat-user-answer {
+      padding: 0.45rem 0.7rem;
+      border-left: 2px solid rgba(232, 196, 160, 0.35);
+      background: rgba(232, 196, 160, 0.04);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.78rem;
+      font-style: italic;
+      line-height: 1.5;
       color: var(--text-muted);
     }
 
+    .chat-mockup-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(184, 169, 232, 0.15), transparent);
+      margin: 0.2rem 0;
+    }
+
+    .chat-result {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text);
+      padding: 0.25rem 0;
+    }
+
     .chat-bubble.audio {
-      align-self: flex-start;
       background: rgba(184, 169, 232, 0.12);
-      border-bottom-left-radius: 4px;
+      border-radius: 14px;
       color: var(--accent);
       display: flex;
       align-items: center;
       gap: 0.5rem;
       font-weight: 500;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .chat-bubble.audio:hover {
+      background: rgba(184, 169, 232, 0.18);
     }
 
     .chat-audio-bar {
@@ -711,16 +777,6 @@
       transition: width 0.25s linear;
     }
 
-    .chat-bubble.audio {
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .chat-bubble.audio:hover {
-      background: rgba(184, 169, 232, 0.18);
-    }
-
     .chat-audio-play {
       font-size: 1rem;
       line-height: 1;
@@ -741,36 +797,16 @@
       font-size: 0.7rem;
       color: var(--accent);
       text-align: center;
-      margin-top: 0.5rem;
+      margin-top: 0.35rem;
       opacity: 0.6;
     }
 
-    /* Typing indicator */
-    .chat-typing {
-      align-self: flex-start;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 0.65rem 0.9rem;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      border-bottom-left-radius: 4px;
-    }
-
-    .chat-typing-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--text-muted);
-      animation: typing-bounce 1.4s ease-in-out infinite;
-    }
-
-    .chat-typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .chat-typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes typing-bounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-4px); opacity: 0.9; }
+    .chat-mockup-label {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      opacity: 0.6;
     }
 
     /* ---- Pricing ---- */
@@ -1160,12 +1196,11 @@
           Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
           de audio única, creada solo para ti.
         </p>
-        <a href="https://t.me/zenti_app_bot?start=web_hero" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'hero'})">
+        <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'hero'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Pruébalo gratis ahora
         </a>
-        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
-        <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">Actualmente disponible en Telegram. App para iOS y Android muy pronto.</span>
+        <span class="cta-hint">Gratis · 3 sesiones · Sin registro</span>
       </div>
     </div>
   </section>
@@ -1196,17 +1231,31 @@
       </div>
       <div class="chat-mockup reveal">
         <div class="chat-mockup-header">
-          <div class="chat-mockup-avatar">Z</div>
-          <span class="chat-mockup-name">Zenti</span>
+          <div class="chat-mockup-header-left">
+            <div class="chat-mockup-orb"></div>
+            <span class="chat-mockup-name">Zenti</span>
+          </div>
+          <span class="chat-mockup-exit">Salir</span>
         </div>
         <div class="chat-mockup-body">
-          <div class="chat-bubble user">Tengo una presentación importante la próxima semana. Me siento nervioso.</div>
-          <div class="chat-bubble bot">Es completamente normal sentirse así antes de algo importante. Cuéntame un poco más: ¿de qué se trata y qué es lo que más te preocupa?</div>
-          <div class="chat-bubble user">Voy a presentar mi proyecto a un cliente potencial. Sería un gran logro en mi carrera, pero no hago presentaciones a menudo y el cliente es muy exigente.</div>
-          <div class="chat-bubble bot">Una mezcla de emoción y miedo, es natural. ¿Qué es lo que más deseas que pase? ¿Cuál sería el resultado ideal?</div>
-          <div class="chat-bubble user">Cerrar al cliente. Que salga convencido del valor que ofrezco y haya buena química entre nosotros.</div>
-          <div class="chat-bubble bot">Perfecto. Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y cierras al cliente. Dame un momento...</div>
-          <div class="chat-bubble bot">Tu meditación está lista 🎧</div>
+          <div class="chat-mockup-steps">
+            <span class="chat-mockup-dot"></span>
+            <span class="chat-mockup-dot"></span>
+            <span class="chat-mockup-dot active"></span>
+          </div>
+          <div class="chat-mockup-exchange">
+            <div class="chat-question">¿Cómo te sientes hoy?</div>
+            <div class="chat-user-answer">Tengo una presentación importante la próxima semana. Me siento nervioso porque el cliente es muy exigente.</div>
+          </div>
+          <div class="chat-mockup-exchange">
+            <div class="chat-question">¿Qué te gustaría sentir en lugar de eso?</div>
+            <div class="chat-user-answer">Seguridad, claridad, y buena energía. Quiero cerrar al cliente y que haya buena química.</div>
+          </div>
+          <div class="chat-mockup-divider"></div>
+          <div class="chat-mockup-exchange">
+            <div class="chat-question">Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y conectas con el cliente.</div>
+          </div>
+          <p class="chat-result">Tu meditación está lista 🎧</p>
           <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
             <audio id="sample-audio" preload="metadata" src="demo.ogg"></audio>
             <span class="chat-audio-play" id="play-icon">▶</span>
@@ -1217,7 +1266,7 @@
         </div>
       </div>
       <div class="inline-cta reveal">
-        <a href="https://t.me/zenti_app_bot?start=web_mockup" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'mockup'})">
+        <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'mockup'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Crear mi meditación gratis
         </a>
@@ -1292,7 +1341,7 @@
         </div>
       </div>
       <div class="inline-cta reveal">
-        <a href="https://t.me/zenti_app_bot?start=web_benefits" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'benefits'})">
+        <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'benefits'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Probar mi primera meditación
         </a>
@@ -1343,7 +1392,7 @@
       <div class="faq-list reveal">
         <details>
           <summary>¿Dónde puedo usar Zenti?</summary>
-          <div class="faq-answer">Estamos por lanzar la app para iOS y Android. Mientras tanto, puedes probarlo gratis en <a href="https://telegram.org/dl" target="_blank" rel="noopener" class="telegram-dl">Telegram</a>.</div>
+          <div class="faq-answer">Zenti está disponible en <a href="https://app.zentiapp.pro" target="_blank" rel="noopener">app.zentiapp.pro</a>. Funciona desde cualquier navegador, sin necesidad de descargar nada.</div>
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
@@ -1363,7 +1412,7 @@
         </details>
         <details>
           <summary>¿Cómo puedo contactar soporte?</summary>
-          <div class="faq-answer">Puedes escribirnos directamente desde <a href="https://t.me/zenti_app_bot" target="_blank" rel="noopener">el bot en Telegram</a> o por correo a <a href="mailto:hola@zennes.io">hola@zennes.io</a>. Te responderemos lo antes posible.</div>
+          <div class="faq-answer">Puedes escribirnos directamente desde <a href="https://app.zentiapp.pro" target="_blank" rel="noopener">la app</a> o por correo a <a href="mailto:hola@zennes.io">hola@zennes.io</a>. Te responderemos lo antes posible.</div>
         </details>
       </div>
     </div>
@@ -1376,12 +1425,11 @@
       <p class="section-label">Empieza ahora</p>
       <h2>Tu primera meditación personalizada te espera</h2>
       <p class="subtitle">3 sesiones gratis, sin registro, listas en 2 minutos. Solo dile a Zenti cómo te sientes.</p>
-      <a href="https://t.me/zenti_app_bot?start=web_bottom" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'bottom'})">
+      <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'bottom'})">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Crear mi meditación gratis
       </a>
-      <span class="cta-hint">Disponible 24/7</span>
-      <span class="cta-hint" style="margin-top: 0.25rem; font-size: 0.8rem;">Actualmente disponible en Telegram. App para iOS y Android muy pronto.</span>
+      <span class="cta-hint">Gratis · 3 sesiones · Sin registro</span>
     </div>
   </section>
 
@@ -1413,20 +1461,6 @@
     );
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-    // Set Telegram download links to the correct app store based on platform
-    (function() {
-      var ua = navigator.userAgent || '';
-      var href;
-      if (/android/i.test(ua)) {
-        href = 'https://play.google.com/store/apps/details?id=org.telegram.messenger';
-      } else if (/iphone|ipad|ipod/i.test(ua)) {
-        href = 'https://apps.apple.com/app/telegram-messenger/id686449807';
-      }
-      if (href) {
-        document.querySelectorAll('.telegram-dl').forEach(function(a) { a.href = href; });
-      }
-    })();
 
     // Staggered reveal for grid items
     const staggerObserver = new IntersectionObserver(
