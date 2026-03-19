@@ -579,6 +579,39 @@
       font-style: italic;
     }
 
+    /* Library counter */
+    .library-counter {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    @media (min-width: 700px) {
+      .library-counter {
+        justify-content: flex-start;
+      }
+    }
+
+    .library-counter-number {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 300;
+      background: linear-gradient(135deg, var(--accent), var(--warm));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-variant-numeric: tabular-nums;
+      min-width: 3ch;
+      text-align: right;
+    }
+
+    .library-counter-label {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
     .library-tagline {
       display: inline-block;
       margin-top: 0.75rem;
@@ -1580,6 +1613,10 @@
             ¿La que te dio claridad antes de una junta difícil? También.
             Vuelve a ellas cuando quieras, cuantas veces quieras.
           </p>
+          <div class="library-counter">
+            <span class="library-counter-number" id="library-count">0</span>
+            <span class="library-counter-label">meditaciones únicas en tu biblioteca</span>
+          </div>
           <span class="library-tagline">Sin suscripción. Sin vencimiento. Tuyas.</span>
         </div>
       </div>
@@ -1786,6 +1823,40 @@
       audioTime.textContent = formatTime(sampleAudio.duration);
       samplePlayer.classList.remove('playing');
     });
+
+    // Library counter animation
+    const counterEl = document.getElementById('library-count');
+    let counterStarted = false;
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !counterStarted) {
+          counterStarted = true;
+          animateCounter(counterEl, 50, 2000);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counterObserver.observe(counterEl);
+
+    function animateCounter(el, target, duration) {
+      const start = performance.now();
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.round(easeOut(progress) * target);
+        el.textContent = value;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target + '+';
+        }
+      }
+      requestAnimationFrame(tick);
+    }
 
     // FAQ open tracking
     document.querySelectorAll('.faq-list details').forEach(detail => {
