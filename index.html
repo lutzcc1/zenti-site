@@ -537,6 +537,171 @@
       line-height: 1.6;
     }
 
+    /* ---- Library section ---- */
+    .library {
+      text-align: center;
+      position: relative;
+    }
+
+    .library-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    @media (min-width: 700px) {
+      .library-layout {
+        flex-direction: row;
+        gap: 4rem;
+        text-align: left;
+      }
+    }
+
+    .library-text {
+      flex: 1;
+    }
+
+    .library-text h2 {
+      margin-bottom: 1.25rem;
+    }
+
+    .library-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .library-text .highlight {
+      color: var(--warm);
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .library-tagline {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(184, 169, 232, 0.2);
+      border-radius: 100px;
+    }
+
+    /* Phone mockup */
+    .phone-mockup {
+      flex-shrink: 0;
+      width: 240px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(12, 15, 26, 0.95);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(184, 169, 232, 0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .phone-mockup-header {
+      padding: 1rem 1.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .phone-mockup-header svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .phone-mockup-title {
+      padding: 0 1.25rem 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    .phone-mockup-list {
+      padding: 0 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .phone-mockup-item {
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .phone-mockup-item:hover {
+      border-color: rgba(184, 169, 232, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-mockup-item-text h4 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .phone-mockup-item-meta {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .phone-mockup-item-arrow {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      opacity: 0.5;
+    }
+
+    .phone-mockup-empty {
+      padding: 0.5rem 1rem 1.25rem;
+      text-align: center;
+    }
+
+    .phone-mockup-empty-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .phone-mockup-empty-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(184, 169, 232, 0.3);
+      animation: library-dot-pulse 2s ease-in-out infinite;
+    }
+
+    .phone-mockup-empty-dot:nth-child(2) { animation-delay: 0.3s; }
+    .phone-mockup-empty-dot:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes library-dot-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    .phone-mockup-empty p {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
     /* ---- Bottom CTA ---- */
     .bottom-cta {
       text-align: center;
@@ -1350,13 +1515,84 @@
     </div>
   </section>
 
+  <!-- Library -->
+  <section class="library">
+    <div class="container">
+      <div class="reveal">
+        <div class="glow-divider" aria-hidden="true"></div>
+      </div>
+      <div class="library-layout reveal">
+        <div class="phone-mockup">
+          <div class="phone-mockup-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Volver
+          </div>
+          <div class="phone-mockup-title">Mis meditaciones</div>
+          <div class="phone-mockup-list">
+            <div class="phone-mockup-item">
+              <div class="phone-mockup-item-text">
+                <h4>Soltar la ansiedad antes de dormir</h4>
+                <span class="phone-mockup-item-meta">4m &middot; Hoy</span>
+              </div>
+              <span class="phone-mockup-item-arrow">&rsaquo;</span>
+            </div>
+            <div class="phone-mockup-item">
+              <div class="phone-mockup-item-text">
+                <h4>Claridad para mi presentación</h4>
+                <span class="phone-mockup-item-meta">3m &middot; Ayer</span>
+              </div>
+              <span class="phone-mockup-item-arrow">&rsaquo;</span>
+            </div>
+            <div class="phone-mockup-item">
+              <div class="phone-mockup-item-text">
+                <h4>Confiar en mi proceso</h4>
+                <span class="phone-mockup-item-meta">5m &middot; Mar 15</span>
+              </div>
+              <span class="phone-mockup-item-arrow">&rsaquo;</span>
+            </div>
+            <div class="phone-mockup-item">
+              <div class="phone-mockup-item-text">
+                <h4>Soltar el día y descansar</h4>
+                <span class="phone-mockup-item-meta">3m &middot; Mar 12</span>
+              </div>
+              <span class="phone-mockup-item-arrow">&rsaquo;</span>
+            </div>
+          </div>
+          <div class="phone-mockup-empty">
+            <div class="phone-mockup-empty-dots" aria-hidden="true">
+              <span class="phone-mockup-empty-dot"></span>
+              <span class="phone-mockup-empty-dot"></span>
+              <span class="phone-mockup-empty-dot"></span>
+            </div>
+            <p>Tu biblioteca sigue creciendo</p>
+          </div>
+        </div>
+        <div class="library-text">
+          <p class="section-label">Tu biblioteca personal</p>
+          <h2>Cada meditación que creas es tuya para siempre</h2>
+          <p>
+            Con cada sesión, tu biblioteca crece. Una colección de meditaciones
+            <span class="highlight">100% hechas para ti</span>, basadas en tus momentos reales,
+            tus emociones, tu historia.
+          </p>
+          <p>
+            ¿Esa meditación que te ayudó a dormir el martes? Ahí está.
+            ¿La que te dio claridad antes de una junta difícil? También.
+            Vuelve a ellas cuando quieras, cuantas veces quieras.
+          </p>
+          <span class="library-tagline">Sin suscripción. Sin vencimiento. Tuyas.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section class="pricing">
     <div class="container">
       <div class="reveal">
         <p class="section-label">Paquetes</p>
         <h2>Tus primeras 3 sesiones son gratis</h2>
-        <p class="pricing-subtitle">Después, elige el paquete que prefieras. Sin suscripciones, sin vencimiento.</p>
+        <p class="pricing-subtitle">Compra sesiones, construye tu biblioteca. Cada meditación queda tuya para siempre. Sin suscripciones, sin vencimiento.</p>
       </div>
       <div class="pricing-grid">
         <div class="pricing-card reveal-stagger">
@@ -1401,6 +1637,10 @@
         <details>
           <summary>¿Las sesiones vencen o hay suscripción?</summary>
           <div class="faq-answer">No y no. Tus sesiones no vencen y no hay cobros recurrentes. Compras un paquete y lo usas a tu ritmo, cuando quieras.</div>
+        </details>
+        <details>
+          <summary>¿Puedo volver a escuchar mis meditaciones?</summary>
+          <div class="faq-answer">Sí. Cada meditación que generas se guarda en tu biblioteca personal. Puedes volver a escucharlas cuando quieras, cuantas veces quieras, sin costo adicional.</div>
         </details>
         <details>
           <summary>¿Cuánto dura cada meditación?</summary>
