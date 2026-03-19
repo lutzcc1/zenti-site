@@ -674,18 +674,25 @@
 
     .phone-mockup-item {
       padding: 0.85rem 1rem;
+      min-height: 3.5rem;
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.07);
       background: rgba(255, 255, 255, 0.03);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      text-align: left;
       transition: border-color 0.3s ease, background 0.3s ease;
     }
 
     .phone-mockup-item:hover {
       border-color: rgba(184, 169, 232, 0.15);
       background: rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-mockup-item-text {
+      flex: 1;
+      min-width: 0;
     }
 
     .phone-mockup-item-text h4 {
@@ -1590,8 +1597,8 @@
             </div>
             <div class="phone-mockup-item">
               <div class="phone-mockup-item-text">
-                <h4>Soltar el día y descansar</h4>
-                <span class="phone-mockup-item-meta">3m &middot; Mar 12</span>
+                <h4>Dejar ir el enojo con mi papá</h4>
+                <span class="phone-mockup-item-meta">4m &middot; Mar 12</span>
               </div>
               <span class="phone-mockup-item-arrow">&rsaquo;</span>
             </div>
@@ -1628,7 +1635,7 @@
       <div class="inline-cta reveal">
         <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'library'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Empieza tu biblioteca
+          Crear mi primera meditación
         </a>
         <span class="cta-hint">Tu primera meditación es gratis</span>
       </div>
