@@ -1331,70 +1331,7 @@
 
 
 
-    /* ---- Nav bar ---- */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(12, 15, 26, 0.8);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .top-bar-brand {
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    .top-bar-links {
-      display: flex;
-      gap: 1.25rem;
-      align-items: center;
-      font-size: 0.85rem;
-    }
-
-    .top-bar-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .top-bar-links a:hover {
-      color: var(--text);
-    }
-
-    .top-bar-cta {
-      padding: 0.4rem 1rem;
-      background: var(--accent);
-      color: var(--bg) !important;
-      border-radius: 100px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      transition: opacity 0.2s;
-    }
-
-    .top-bar-cta:hover {
-      opacity: 0.85;
-    }
-
-    @media (max-width: 600px) {
-      .top-bar-link-secondary {
-        display: none;
-      }
-    }
-
-    /* ---- Breathing circle mobile shrink ---- */
+    /* ---- Mobile adjustments ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
         width: 100px;
@@ -1419,6 +1356,14 @@
         font-size: 1rem;
         margin-bottom: 2rem;
       }
+      .cta {
+        padding: 0.85rem 2rem;
+        font-size: 0.95rem;
+      }
+      .cta svg {
+        width: 18px;
+        height: 18px;
+      }
       .orb-3 {
         display: none;
       }
@@ -1435,15 +1380,6 @@
 </head>
 <body>
 
-  <!-- Top bar -->
-  <nav class="top-bar">
-    <a href="/" class="top-bar-brand">Zenti</a>
-    <div class="top-bar-links">
-      <a href="psicologos.html" class="top-bar-link-secondary">Para psicólogos</a>
-      <a href="empresas.html" class="top-bar-link-secondary">Para empresas</a>
-      <a href="https://app.zentiapp.pro" class="top-bar-cta" target="_blank" rel="noopener">Probar gratis</a>
-    </div>
-  </nav>
 
 
   <!-- Ambient background -->
