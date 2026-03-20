@@ -184,6 +184,7 @@
       50% { transform: scale(1); opacity: 1; }
     }
 
+
     /* ---- Floating particles ---- */
     .particles {
       position: fixed;
@@ -292,6 +293,15 @@
       background-clip: text;
     }
 
+    .hero-carousel {
+      display: inline-block;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-carousel.fade-out {
+      opacity: 0;
+    }
+
     .subtitle {
       font-size: 1.15rem;
       color: var(--text-muted);
@@ -342,7 +352,13 @@
       color: var(--text-muted);
     }
 
-    /* ---- How it works ---- */
+    .cta-privacy {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+/* ---- How it works ---- */
     .how-it-works {
       text-align: center;
     }
@@ -482,14 +498,7 @@
       font-size: 1.2rem;
       border: 1px solid rgba(184, 169, 232, 0.2);
       background: var(--accent-glow);
-      animation: breathe 6s ease-in-out infinite;
     }
-
-    .benefit-icon:nth-child(1) { animation-delay: 0s; }
-
-    .benefit:nth-child(2) .benefit-icon { animation-delay: -1.5s; }
-    .benefit:nth-child(3) .benefit-icon { animation-delay: -3s; }
-    .benefit:nth-child(4) .benefit-icon { animation-delay: -4.5s; }
 
     .benefit h3 {
       font-size: 1rem;
@@ -501,6 +510,88 @@
       font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    /* ---- Comparison ---- */
+    .comparison {
+      text-align: center;
+    }
+
+    .comparison-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .comparison-col {
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      text-align: left;
+    }
+
+    .comparison-col h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .comparison-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .comparison-col li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .comparison-col li::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .comparison-col-other {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+    }
+
+    .comparison-col-other li {
+      color: var(--text-muted);
+    }
+
+    .comparison-col-other li::before {
+      content: '—';
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    .comparison-col-zenti {
+      background: rgba(184, 169, 232, 0.06);
+      border: 1px solid rgba(184, 169, 232, 0.2);
+    }
+
+    .comparison-col-zenti li {
+      color: var(--text);
+    }
+
+    .comparison-col-zenti li::before {
+      content: '\2713';
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 500px) {
+      .comparison-table {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ---- Library section ---- */
@@ -1145,6 +1236,12 @@
       margin-bottom: 0.15rem;
     }
 
+    .pricing-per-session {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
     .pricing-savings {
       display: inline-block;
       margin-top: 0.75rem;
@@ -1233,92 +1330,6 @@
     }
 
 
-    /* ---- Announcement banner ---- */
-    .announce-banner {
-      background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(184, 169, 232, 0.1));
-      border-bottom: 1px solid rgba(184, 169, 232, 0.15);
-      padding: 0.75rem 1.5rem;
-      padding-top: calc(0.75rem + 56px);
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--text);
-      position: relative;
-    }
-
-    .announce-banner p {
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .announce-banner form {
-      display: inline-flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    .announce-banner input[type="email"] {
-      padding: 0.4rem 0.75rem;
-      border-radius: 100px;
-      border: 1px solid rgba(184, 169, 232, 0.3);
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text);
-      font-size: 0.85rem;
-      font-family: inherit;
-      outline: none;
-      width: 200px;
-    }
-
-    .announce-banner input[type="email"]::placeholder {
-      color: var(--text-muted);
-    }
-
-    .announce-banner input[type="email"]:focus {
-      border-color: var(--accent);
-    }
-
-    .announce-banner button[type="submit"] {
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      border: none;
-      background: var(--accent);
-      color: var(--bg);
-      font-size: 0.85rem;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-
-    .announce-banner button[type="submit"]:hover {
-      opacity: 0.85;
-    }
-
-    .announce-banner .dismiss {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 0.25rem;
-      line-height: 1;
-    }
-
-    @media (max-width: 600px) {
-      .announce-banner form {
-        display: flex;
-        justify-content: center;
-      }
-      .announce-banner input[type="email"] {
-        width: 160px;
-      }
-      .announce-banner .dismiss {
-        right: 0.5rem;
-      }
-    }
 
     /* ---- Nav bar ---- */
     .top-bar {
@@ -1363,6 +1374,26 @@
       color: var(--text);
     }
 
+    .top-bar-cta {
+      padding: 0.4rem 1rem;
+      background: var(--accent);
+      color: var(--bg) !important;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: opacity 0.2s;
+    }
+
+    .top-bar-cta:hover {
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      .top-bar-link-secondary {
+        display: none;
+      }
+    }
+
     /* ---- Breathing circle mobile shrink ---- */
     @media (max-width: 600px) {
       .breath-circle-wrapper {
@@ -1388,6 +1419,17 @@
         font-size: 1rem;
         margin-bottom: 2rem;
       }
+      .orb-3 {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -1397,23 +1439,12 @@
   <nav class="top-bar">
     <a href="/" class="top-bar-brand">Zenti</a>
     <div class="top-bar-links">
-      <a href="psicologos.html">Para psicólogos</a>
-      <a href="empresas.html">Para empresas</a>
+      <a href="psicologos.html" class="top-bar-link-secondary">Para psicólogos</a>
+      <a href="empresas.html" class="top-bar-link-secondary">Para empresas</a>
+      <a href="https://app.zentiapp.pro" class="top-bar-cta" target="_blank" rel="noopener">Probar gratis</a>
     </div>
   </nav>
 
-  <!-- App announcement banner -->
-  <div class="announce-banner" id="announce-banner">
-    <button class="dismiss" onclick="document.getElementById('announce-banner').remove(); localStorage.setItem('banner-dismissed','1');" aria-label="Cerrar">&times;</button>
-    <p>La app de Zenti llega pronto a iOS y Android</p>
-    <form action="https://formsubmit.co/hola@zennes.io" method="POST">
-      <input type="hidden" name="_subject" value="Zenti App - Nuevo registro de interés">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://zentiapp.pro">
-      <input type="email" name="email" placeholder="tu@email.com" required>
-      <button type="submit">Avísame</button>
-    </form>
-  </div>
 
   <!-- Ambient background -->
   <div class="ambient" aria-hidden="true">
@@ -1421,6 +1452,7 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
+
 
   <!-- Floating particles -->
   <div class="particles" aria-hidden="true"></div>
@@ -1436,26 +1468,26 @@
           </div>
         </div>
         <p class="brand">Zenti</p>
-        <h1>Tu mente no para. En 2 minutos, <strong>una meditación que te entiende.</strong></h1>
+        <h1>No necesitas otra meditación genérica.<br>Necesitas una que hable de <strong class="hero-carousel">tu insomnio de esta noche</strong></h1>
         <p class="subtitle">
-          Dile a Zenti cómo te sientes hoy. En minutos, recibirás una meditación
-          de audio única, creada solo para ti.
+          Cuéntale a Zenti cómo te sientes. En minutos, recibe una meditación de audio creada desde cero para ti.
         </p>
         <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'hero'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Pruébalo gratis ahora
+          Crear mi meditación gratis
         </a>
-        <span class="cta-hint">Gratis · 3 sesiones · Sin registro</span>
+        <span class="cta-hint">Gratis · 3 meditaciones</span>
+        <span class="cta-hint cta-privacy">&#128274; Tu conversación es privada y confidencial</span>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
+<!-- How it works -->
   <section class="how-it-works">
     <div class="container">
       <div class="reveal">
         <p class="section-label">Cómo funciona</p>
-        <h2>Tu primera meditación en 3 minutos</h2>
+        <h2>Tu primera meditación en minutos</h2>
       </div>
       <div class="steps">
         <div class="step reveal-stagger">
@@ -1498,7 +1530,7 @@
           </div>
           <div class="chat-mockup-divider"></div>
           <div class="chat-mockup-exchange">
-            <div class="chat-question">Voy a crear una meditación para que vivas ese momento: entras seguro, te expresas con claridad, y conectas con el cliente.</div>
+            <div class="chat-question">Perfecto. Voy a crear una meditación para que entres a esa presentación sintiéndote seguro, claro, y con la energía que describes. Lista en segundos.</div>
           </div>
           <p class="chat-result">Tu meditación está lista 🎧</p>
           <div class="chat-bubble audio" id="sample-player" role="button" aria-label="Reproducir ejemplo de meditación">
@@ -1515,7 +1547,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Crear mi meditación gratis
         </a>
-        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
+        <span class="cta-hint">Gratis · 3 meditaciones</span>
       </div>
     </div>
   </section>
@@ -1525,7 +1557,7 @@
     <div class="container">
       <div class="reveal">
         <p class="section-label">Beneficios</p>
-        <h2>Por qué funciona</h2>
+        <h2>Qué lo hace diferente</h2>
       </div>
       <div class="benefits-grid">
         <div class="benefit reveal-stagger">
@@ -1533,8 +1565,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <div>
-            <h3>Única en cada momento</h3>
-            <p>Cada meditación se genera desde cero para tu momento actual. Nunca escucharás la misma sesión dos veces.</p>
+            <h3>Nunca la misma meditación dos veces</h3>
+            <p>Porque tú no eres el mismo cada día. Cada sesión responde a lo que estás viviendo ahora, no a lo que viviste ayer.</p>
           </div>
         </div>
         <div class="benefit reveal-stagger">
@@ -1542,8 +1574,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
           <div>
-            <h3>Hecha para lo que necesitas hoy</h3>
-            <p>Cada meditación parte de tus palabras y tu estado emocional. No es un audio genérico: es una guía creada para lo que estás viviendo ahora.</p>
+            <h3>Para lo que sientes hoy, no para "estrés en general"</h3>
+            <p>Nada de guías genéricas. Zenti escucha tus palabras y crea algo que encaja exactamente con lo que estás cargando.</p>
           </div>
         </div>
         <div class="benefit reveal-stagger">
@@ -1551,8 +1583,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg>
           </div>
           <div>
-            <h3>Una voz que te acompaña</h3>
-            <p>Cada meditación llega con voz cálida y música ambiental. Como tener un guía personal siempre contigo.</p>
+            <h3>Una voz que se siente como compañía</h3>
+            <p>Audio con voz cálida y música ambiental diseñada para llevarte, suavemente, de donde estás a donde quieres estar.</p>
           </div>
         </div>
         <div class="benefit reveal-stagger">
@@ -1560,17 +1592,47 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
           <div>
-            <h3>Tu guía personal, a un mensaje</h3>
-            <p>Escribe cómo te sientes y tu meditación llega en minutos.</p>
+            <h3>Tu espacio de calma, a un mensaje de distancia</h3>
+            <p>No necesitas una rutina que sostener ni tiempo extra que encontrar. Solo escríbele a Zenti.</p>
           </div>
         </div>
       </div>
       <div class="inline-cta reveal">
         <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'benefits'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Probar mi primera meditación
+          Crear mi meditación gratis
         </a>
-        <span class="cta-hint">Gratis · Sin registro · Disponible ya</span>
+        <span class="cta-hint">Gratis · 3 meditaciones</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="comparison">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">La diferencia</p>
+        <h2>No es otra app de meditación</h2>
+      </div>
+      <div class="comparison-table reveal">
+        <div class="comparison-col comparison-col-other">
+          <h3>Otras apps</h3>
+          <ul>
+            <li>Miles de audios genéricos</li>
+            <li>La misma sesión para todos</li>
+            <li>Suscripción mensual</li>
+            <li>Tu progreso desaparece si cancelas</li>
+          </ul>
+        </div>
+        <div class="comparison-col comparison-col-zenti">
+          <h3>Zenti</h3>
+          <ul>
+            <li>Una meditación creada solo para ti</li>
+            <li>Adaptada a cómo te sientes hoy</li>
+            <li>Sin suscripción. Compra lo que quieras</li>
+            <li>Tu biblioteca es tuya para siempre</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -1662,42 +1724,10 @@
       <div class="inline-cta reveal">
         <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'library'})">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Crear mi colección
+          Crear mi meditación gratis
         </a>
         <span class="cta-hint">Tu primera meditación es gratis</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="pricing">
-    <div class="container">
-      <div class="reveal">
-        <p class="section-label">Paquetes</p>
-        <h2>Tus primeras 3 sesiones son gratis</h2>
-        <p class="pricing-subtitle">Compra sesiones, construye tu biblioteca. Cada meditación queda tuya para siempre. Sin suscripciones, sin vencimiento.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card reveal-stagger">
-          <h3>Básico</h3>
-          <p class="pricing-sessions">5 sesiones</p>
-          <p class="pricing-price">$199</p>
-        </div>
-        <div class="pricing-card featured reveal-stagger">
-          <div class="pricing-badge">Más elegido</div>
-          <h3>Popular</h3>
-          <p class="pricing-sessions">15 sesiones</p>
-          <p class="pricing-price">$499</p>
-          <span class="pricing-savings">Ahorra 17%</span>
-        </div>
-        <div class="pricing-card reveal-stagger">
-          <h3>Premium</h3>
-          <p class="pricing-sessions">30 sesiones</p>
-          <p class="pricing-price">$899</p>
-          <span class="pricing-savings">Ahorra 25%</span>
-        </div>
-      </div>
-      <p class="pricing-note">Precios en MXN. Compra directo desde la app.</p>
     </div>
   </section>
 
@@ -1715,11 +1745,11 @@
         </details>
         <details>
           <summary>¿Es realmente gratis?</summary>
-          <div class="faq-answer">Tus primeras 3 meditaciones son completamente gratis. Después, puedes comprar paquetes de sesiones desde $199 MXN. Sin suscripciones, sin vencimiento: las usas cuando quieras.</div>
+          <div class="faq-answer">Tus primeras 3 meditaciones son completamente gratis. Después, puedes comprar paquetes de meditaciones desde $199 MXN. Sin suscripciones, sin vencimiento: las usas cuando quieras.</div>
         </details>
         <details>
-          <summary>¿Las sesiones vencen o hay suscripción?</summary>
-          <div class="faq-answer">No y no. Tus sesiones no vencen y no hay cobros recurrentes. Compras un paquete y lo usas a tu ritmo, cuando quieras.</div>
+          <summary>¿Las meditaciones vencen o hay suscripción?</summary>
+          <div class="faq-answer">No y no. Tus meditaciones no vencen y no hay cobros recurrentes. Compras un paquete y lo usas a tu ritmo, cuando quieras.</div>
         </details>
         <details>
           <summary>¿Puedo volver a escuchar mis meditaciones?</summary>
@@ -1747,12 +1777,47 @@
       <div class="glow-divider" aria-hidden="true"></div>
       <p class="section-label">Empieza ahora</p>
       <h2>Tu primera meditación personalizada te espera</h2>
-      <p class="subtitle">3 sesiones gratis, sin registro, listas en 2 minutos. Solo dile a Zenti cómo te sientes.</p>
+      <p class="subtitle">3 meditaciones gratis, listas en minutos. Solo dile a Zenti cómo te sientes.</p>
       <a href="https://app.zentiapp.pro" class="cta" target="_blank" rel="noopener" onclick="gtag('event', 'cta_click', {location: 'bottom'})">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Crear mi meditación gratis
       </a>
-      <span class="cta-hint">Gratis · 3 sesiones · Sin registro</span>
+      <span class="cta-hint">Gratis · 3 meditaciones</span>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Paquetes</p>
+        <h2>Tus primeras 3 meditaciones son gratis</h2>
+        <p class="pricing-subtitle">Compra meditaciones, construye tu biblioteca. Cada meditación queda tuya para siempre. Sin suscripciones, sin vencimiento.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal-stagger">
+          <h3>Básico</h3>
+          <p class="pricing-sessions">5 meditaciones</p>
+          <p class="pricing-price">$199</p>
+          <p class="pricing-per-session">$39.80 por sesión</p>
+        </div>
+        <div class="pricing-card featured reveal-stagger">
+          <div class="pricing-badge">Más elegido</div>
+          <h3>Popular</h3>
+          <p class="pricing-sessions">15 meditaciones</p>
+          <p class="pricing-price">$499</p>
+          <p class="pricing-per-session">$33.27 por sesión</p>
+          <span class="pricing-savings">Ahorra 17%</span>
+        </div>
+        <div class="pricing-card reveal-stagger">
+          <h3>Premium</h3>
+          <p class="pricing-sessions">30 meditaciones</p>
+          <p class="pricing-price">$899</p>
+          <p class="pricing-per-session">$29.97 por sesión</p>
+          <span class="pricing-savings">Ahorra 25%</span>
+        </div>
+      </div>
+      <p class="pricing-note">Precios en MXN. Compra directo desde la app.</p>
     </div>
   </section>
 
@@ -1765,10 +1830,53 @@
   </footer>
 
   <script>
-    // Hide announcement banner if previously dismissed
-    if (localStorage.getItem('banner-dismissed') === '1') {
-      var b = document.getElementById('announce-banner');
-      if (b) b.remove();
+
+    // Hero carousel
+    const heroCarousel = document.querySelector('.hero-carousel');
+    if (heroCarousel) {
+      const lines = [
+        'tu insomnio de esta noche',
+        'tu estrés del trabajo',
+        'tu pelea de hoy',
+        'tu carrera del domingo',
+        'tu relación con tu papá',
+        'tu domingo de ansiedad',
+        'tu lugar seguro, el que solo tú conoces'
+      ];
+      let current = 0;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        setInterval(() => {
+          heroCarousel.classList.add('fade-out');
+          setTimeout(() => {
+            current = (current + 1) % lines.length;
+            heroCarousel.textContent = lines[current];
+            heroCarousel.classList.remove('fade-out');
+          }, 500);
+        }, 3500);
+      }
+    }
+
+    // Floating particles
+    const particlesContainer = document.querySelector('.particles');
+    if (particlesContainer) {
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.bottom = '-5px';
+        particle.style.width = (Math.random() * 3 + 2.5) + 'px';
+        particle.style.height = particle.style.width;
+        const duration = Math.random() * 12 + 10;
+        particle.style.animationDuration = duration + 's';
+        particle.style.animationDelay = '0s';
+        particlesContainer.appendChild(particle);
+        setTimeout(() => particle.remove(), duration * 1000);
+      }
+
+      setInterval(createParticle, 1800);
+      for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
     }
 
     // Scroll reveal
@@ -1806,24 +1914,6 @@
       staggerObserver.observe(el)
     );
 
-    // Floating particles
-    const particlesContainer = document.querySelector('.particles');
-    function createParticle() {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.bottom = '-5px';
-      particle.style.width = (Math.random() * 3 + 2.5) + 'px';
-      particle.style.height = particle.style.width;
-      const duration = Math.random() * 12 + 10;
-      particle.style.animationDuration = duration + 's';
-      particle.style.animationDelay = '0s';
-      particlesContainer.appendChild(particle);
-      setTimeout(() => particle.remove(), duration * 1000);
-    }
-
-    setInterval(createParticle, 1800);
-    for (let i = 0; i < 6; i++) setTimeout(createParticle, i * 400);
 
     // Sample audio player
     const samplePlayer = document.getElementById('sample-player');
